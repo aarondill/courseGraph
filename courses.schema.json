@@ -17,13 +17,7 @@
       "type": "object",
       "description": "Courses taking for fast track program",
       "patternProperties": {
-        "^//.*": {
-          "anyOf": [
-            { "type": "null" },
-            { "type": "object" },
-            { "type": "string" }
-          ]
-        }
+        "^//.*": { "anyOf": [{ "type": "object" }, { "type": "string" }] }
       },
       "additionalProperties": {
         "type": "object",
@@ -48,13 +42,7 @@
       "type": "object",
       "description": "Courses required for the degree",
       "patternProperties": {
-        "^//.*": {
-          "anyOf": [
-            { "type": "null" },
-            { "type": "object" },
-            { "type": "string" }
-          ]
-        }
+        "^//.*": { "anyOf": [{ "type": "object" }, { "type": "string" }] }
       },
       "additionalProperties": {
         "type": "object",
@@ -78,7 +66,8 @@
         "type": "array",
         "description": "Courses taken in semester",
         "items": { "type": "string" }
-      }
+      },
+      "patternProperties": { "^//.*": { "type": "string" } }
     }
   }
 }

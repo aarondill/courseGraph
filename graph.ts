@@ -13,15 +13,17 @@ type json = {
 };
 const json = JSON.parse(await fs.readFile("./courses.json", "utf8")) as json;
 // Comments are allowed in the properties of "courses". Remove any keys that start with "//"
-json.courses = Object.fromEntries(
-  Object.entries(json.courses).filter(([k]) => !k.startsWith("//"))
-);
+const filterComments = <T extends Record<string, any>>(obj: T): T =>
+  Object.fromEntries(
+    Object.entries(obj).filter(([k]) => !k.startsWith("//"))
+  ) as T;
+json.courses = filterComments(json.courses);
+json.taken = filterComments(json.taken);
+json["Fast Track"] = filterComments(json["Fast Track"] ?? {});
 
 {
   // Fast Track
-  for (const [id, v] of Object.entries(json["Fast Track"] ?? {}).filter(
-    ([k]) => !k.startsWith("//")
-  )) {
+  for (const [id, v] of Object.entries(json["Fast Track"] ?? {})) {
     json.courses[id] = v; // merge in the fast track course
     if (!v.replaces) continue;
     const replaced = json.courses[v.replaces];
