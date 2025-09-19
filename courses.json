@@ -88,7 +88,7 @@
       "reqs": ["SE 2340", "CS 2305", "CS 2337"]
     },
     "SE 4376": {
-      "name": "SE Technical Elective (CS 6329)",
+      "name": "SE Technical Elective (SE 6329)",
       "reqs": ["CS 2337", "SE 3354"]
     },
     "CS 4384": {
@@ -105,9 +105,11 @@
     "GEOG 2303": { "name": "Core: 080" },
     "MATH 1316": { "name": "Free Elective" },
     "RHET 1301": { "name": "Free Elective" },
-    "MATH 2312": { "name": "Precalculus" },
+    "MATH 2312": { "name": "Precalculus" }
+  },
 
-    "// Fast Track / Grad Courses after this": null,
+  "Fast Track": {
+    "// reqs": "one of SE 4348,SE 4351, or SE 4352",
     "FAST TRACK": {
       "name": "Fast Track Program Benchmark Courses",
       "reqs": [
@@ -116,30 +118,34 @@
         "SE 3345",
         "SE 3354",
         "SE 4367",
-        "SE 4348",
-        "SE 4351",
-        "SE 4352"
-      ]
+        "SE 4348"
+      ],
+      "replaces": null
     },
     "SE 6329": {
       "name": "Object Oriented Design",
-      "reqs": ["FAST TRACK", "SE 3354"]
+      "reqs": ["FAST TRACK", "SE 3354"],
+      "replaces": "SE 4376"
     },
     "CS 6360": {
       "name": "Database Systems",
-      "reqs": ["FAST TRACK", "SE 3345"]
+      "reqs": ["FAST TRACK", "SE 3345"],
+      "replaces": "SE 4347"
     },
     "SE 6362": {
       "name": "Architecture and Design (Approval Needed)",
-      "reqs": ["FAST TRACK", "SE 3354"]
+      "reqs": ["FAST TRACK", "SE 3354"],
+      "replaces": "SE 4352"
     },
     "CS 6371": {
       "name": "Programming Languages (Approval Needed)",
-      "reqs": ["FAST TRACK", "SE 3345", "CS 4384"]
+      "reqs": ["FAST TRACK", "SE 3345", "CS 4384"],
+      "replaces": "CS 4337"
     },
     "SE 6388": {
       "name": "Software Project Management",
-      "reqs": ["FAST TRACK", "SE 3354"]
+      "reqs": ["FAST TRACK", "SE 3354"],
+      "replaces": "SE 4381"
     }
   },
   "taken": {

@@ -13,12 +13,47 @@
       "type": "string",
       "description": "The degree being studied"
     },
+    "Fast Track": {
+      "type": "object",
+      "description": "Courses taking for fast track program",
+      "patternProperties": {
+        "^//.*": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "object" },
+            { "type": "string" }
+          ]
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "description": "Course metadata",
+        "required": ["name", "replaces"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "replaces": {
+            "description": "Course that this replaces",
+            "anyOf": [{ "type": "string" }, { "type": "null" }]
+          },
+          "reqs": {
+            "type": "array",
+            "description": "Course requirements",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
     "courses": {
       "type": "object",
       "description": "Courses required for the degree",
       "patternProperties": {
         "^//.*": {
-          "anyOf": [{ "type": "null" }, { "type": "object" }]
+          "anyOf": [
+            { "type": "null" },
+            { "type": "object" },
+            { "type": "string" }
+          ]
         }
       },
       "additionalProperties": {
