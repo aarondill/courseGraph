@@ -56,13 +56,16 @@ const output = `strict digraph graph_name {
     labeljust = "c",
     rankdir = TB,
     splines = spline,
-    ranksep = 2,
-    nodesep = 0.1
-    fontsize="60"
+    ranksep = 2.5,
+    nodesep = 0
+    fontsize = 30
+    size = "11,8.5"
+    ratio = "compress"
   ];
   node [
     style = "solid,filled",
     fillcolor = "lightblue2",
+    margin = 0.01
   ];
   ${nodes.replaceAll("\n", "\n  ")}
   ${root}
