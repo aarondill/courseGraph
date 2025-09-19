@@ -1,5 +1,6 @@
-import { execSync } from "node:child_process";
+import cp from "node:child_process";
 import fs from "node:fs/promises";
+import path from "node:path";
 type json = {
   degree: string; // Degree name
   courses: Record<string, { name: string; reqs?: string[] }>; // course code -> {course name, prerequisite codes}
@@ -24,10 +25,16 @@ function esc(strings: TemplateStringsArray | string, ...values: any[]) {
 
 const nodes = Object.entries(json.courses)
   .map(([id, { name, reqs }]) => {
-    const semester = courseToSemester.has(id)
-      ? " - " + courseToSemester.get(id)!
-      : "";
-    const color = semester ? `, fillcolor = "lightgreen"` : "";
+    // const semester = courseToSemester.has(id)
+    //   ? " - " + courseToSemester.get(id)!
+    //   : "";
+    const semester = "";
+    const allPrereqsMet = reqs?.every(req => courseToSemester.has(req)) ?? true;
+    const color = courseToSemester.has(id)
+      ? `, fillcolor = "lightgreen"`
+      : allPrereqsMet
+        ? ", fillcolor = yellow"
+        : "";
     const ret =
       esc`"${id}" [ label = "\\N${semester}\\n${name}"` + color + ` ];`;
     if (!reqs || reqs.length === 0) return ret;
@@ -49,14 +56,29 @@ const output = `strict digraph graph_name {
     labeljust = "c",
     rankdir = TB,
     splines = spline,
-    ranksep = 1.0,
-    nodesep = 0.9
+    ranksep = 3.0,
+    nodesep = 0.1
+    // fontsize="120"
   ];
-  node [ style = "solid,filled", fillcolor = "lightblue2", ];
+  node [
+    style = "solid,filled",
+    fillcolor = "lightblue2",
+    // fontsize="30",
+  ];
   ${nodes.replaceAll("\n", "\n  ")}
   ${root}
 }
 `;
 
-await fs.writeFile("./out.gv", output);
-execSync("dot -Tsvg out.gv -o out.svg", { stdio: "inherit" });
+const outputFile = process.argv[2] || "out.svg";
+const ext = path.basename(outputFile).split(".").pop();
+if (ext == "gv") {
+  // if the user wants the graph, give it to them
+  await fs.writeFile(outputFile, output);
+} else {
+  // Otherwise, run dot with the output as it's stdin to create the desired output format
+  cp.spawnSync("dot", [`-T${ext}`, "-o", outputFile], {
+    input: output,
+    stdio: "inherit",
+  });
+}
