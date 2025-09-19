@@ -1,8 +1,123 @@
 {
+  "$schema": "./courses.schema.json",
+  "degree": "B.S. in Computer Science",
   "courses": {
-    "ECS 1100": "Intro to Engineering and CS"
+    "ECS 1100": { "name": "Intro to Engineering and CS" },
+    "CS 1200": { "name": "Intro to CS and SE" },
+    "MATH 2413": { "name": "Differential Calculus", "reqs": ["MATH 2312"] },
+    "CS 1436": { "name": "Programming Fundamentals" },
+    "MATH 2414": { "name": "Integral Calculus", "reqs": ["MATH 2413"] },
+    "CS 1337": { "name": "Computer Science I", "reqs": ["CS 1436"] },
+    "PHYS 2325": { "name": "Mechanics", "reqs": ["MATH 2413"] },
+    "PHYS 2125": { "name": "Physics Laboratory I", "reqs": ["PHYS 2325"] },
+    "CS 2305": {
+      "name": "Discrete Mathematics for Computing I",
+      "reqs": ["MATH 2413"]
+    },
+    "CS 2337": { "name": "Computer Science II", "reqs": ["CS 1337"] },
+    "SE 2340": {
+      "name": "Computer Architecture",
+      "reqs": ["CS 1337", "CS 2305"]
+    },
+    "MATH 4334": {
+      "name": "Math Elective - Numerical Analysis",
+      "reqs": ["CS 1337", "MATH 2418", "MATH 2451"]
+    },
+    "PHYS 2326": {
+      "name": "Electromagnetism and Waves",
+      "reqs": ["PHYS 2325", "MATH 2414"]
+    },
+    "PHYS 2126": { "name": "Physics Laboratory II", "reqs": ["PHYS 2326"] },
+    "MATH 2418": { "name": "Linear Algebra", "reqs": ["MATH 2413"] },
+    "SE 3306": { "name": "Mathematics Foundations of SE", "reqs": ["CS 2305"] },
+    "SE 3341": {
+      "name": "Probability & Statistics in CS/SE",
+      "reqs": ["CS 2305", "MATH 2414", "MATH 2418"]
+    },
+    "SE 3345": {
+      "name": "Data Structures & Intro to Algorithmic Analysis",
+      "reqs": ["CS 2337", "CS 2305"]
+    },
+    "SE 3377": {
+      "name": "C/C++ Programming in a UNIX Envirn",
+      "reqs": ["CS 2337"]
+    },
+    "ECS 2390": {
+      "name": "Professional & Technical Communication",
+      "reqs": ["RHET 1302"]
+    },
+    "SE 3354": {
+      "name": "Software Engineering",
+      "reqs": ["CS 2305", "CS 2336", "ECS 2390"]
+    },
+    "SE 4348": {
+      "name": "Operating Systems Concepts",
+      "reqs": ["SE 2340", "SE 3345", "SE 3377"]
+    },
+    "SE 3162": {
+      "name": "Professional Responsibility in CS/SE",
+      "reqs": ["ECS 2390", "GOVT 2305"]
+    },
+    "SE 4347": { "name": "Database Systems", "reqs": ["SE 3345"] },
+    "SE 4381": {
+      "name": "Software Project Planning & Mgmt.",
+      "reqs": ["SE 3354"]
+    },
+    "SE 4352": {
+      "name": "Software Architecture & Design",
+      "reqs": ["SE 3306", "SE 3345"]
+    },
+    "SE 4351": {
+      "name": "Requirements Engineering",
+      "reqs": ["SE 3306", "SE 3345"]
+    },
+    "SE 4367": {
+      "name": "Software Testing, Verif, Valid, QA",
+      "reqs": ["SE 3306", "SE 3354"]
+    },
+    "SE 4485": {
+      "name": "Software Engineering Project",
+      "reqs": ["SE 4381", "SE 4352", "SE 4351", "SE 4367"]
+    },
+    "CS 4397": {
+      "name": "SE Technical Elective - Embedded Computer Systems",
+      "reqs": ["SE 4348"]
+    },
+    "CS 4337": {
+      "name": "SE Technical Elective - Programming Languages Paradigms",
+      "reqs": ["SE 2340", "CS 2305", "CS 2337"]
+    },
+    "SE 4376": {
+      "name": "SE Technical Elective - Object Oriented Design",
+      "reqs": ["CS 2337", "SE 3354"]
+    },
+    "CS 4394": {
+      "name": "SE Technical Elective - Implementation of Modern Operating Systems",
+      "reqs": ["SE 4348"]
+    },
+    "RHET 1302": { "name": "Communication (Core: 010)" },
+    "GOVT 2305": { "name": "Government/ Political Science (Core: 070)" },
+    "GOVT 2306": { "name": "Government/ Political Science (Core: 070)" },
+    "HIST 1301": { "name": "American History (Core: 060)" },
+    "HIST 1302": { "name": "American History (Core: 060)" },
+    "HIST 2322": { "name": "Language, Philosophy and Culture (Core: 040)" },
+    "THEA 1310": { "name": "Creative Arts (Core: 050)" },
+    "GEOG 2303": { "name": "Social Behavioral Science (Core: 080)" },
+    "MATH 1316": { "name": "Free Elective - Precalculus" },
+    "RHET 1301": { "name": "Free Elective - Rhetoric 1" }
   },
   "taken": {
-    "Fall 2025": ["ECS 1100"]
+    "Transfer": [
+      "MATH 1316",
+      "RHET 1301",
+      "RHET 1302",
+      "GEOG 2303",
+      "HIST 2322",
+      "MATH 2413",
+      "CS 1436",
+      "CS 1337",
+      "MATH 2312"
+    ],
+    "2025 Fall": ["ECS 1100", "CS 1200", "MATH 2414", "GOVT 2305", "CS 2337"]
   }
 }
