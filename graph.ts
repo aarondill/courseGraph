@@ -47,7 +47,8 @@ const noPrereqs = Object.keys(json.courses).filter(
   id => !json.courses[id]?.reqs?.length
 );
 const root =
-  esc`"${json.degree}" -> {"` + noPrereqs.map(esc).join('", "') + `"};`;
+  esc`degree [ label = "${json.degree}", fillcolor = "orangered" ];` +
+  `degree -> {"${noPrereqs.map(esc).join('", "')}"};`;
 
 const output = `strict digraph graph_name {
   graph [
@@ -56,14 +57,13 @@ const output = `strict digraph graph_name {
     labeljust = "c",
     rankdir = TB,
     splines = spline,
-    ranksep = 3.0,
+    ranksep = 2,
     nodesep = 0.1
-    // fontsize="120"
+    fontsize="60"
   ];
   node [
     style = "solid,filled",
     fillcolor = "lightblue2",
-    // fontsize="30",
   ];
   ${nodes.replaceAll("\n", "\n  ")}
   ${root}
