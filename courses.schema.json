@@ -3,6 +3,7 @@
   "description": "The metadata for the exercise",
   "type": "object",
   "required": ["courses", "taken", "degree"],
+  "additionalProperties": false,
   "properties": {
     "degree": {
       "type": "string",
@@ -11,18 +12,17 @@
     "courses": {
       "type": "object",
       "description": "Courses required for the degree",
-      "patternProperties": {
-        ".*": {
-          "type": "object",
-          "description": "Course metadata",
-          "required": ["name"],
-          "properties": {
-            "name": { "type": "string" },
-            "reqs": {
-              "type": "array",
-              "description": "Course requirements",
-              "items": { "type": "string" }
-            }
+      "additionalProperties": {
+        "type": "object",
+        "description": "Course metadata",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "reqs": {
+            "type": "array",
+            "description": "Course requirements",
+            "items": { "type": "string" }
           }
         }
       }
@@ -30,12 +30,10 @@
     "taken": {
       "type": "object",
       "description": "Courses already taken in each semester",
-      "patternProperties": {
-        ".*": {
-          "type": "array",
-          "description": "Courses taken in semester",
-          "items": { "type": "string" }
-        }
+      "additionalProperties": {
+        "type": "array",
+        "description": "Courses taken in semester",
+        "items": { "type": "string" }
       }
     }
   }
