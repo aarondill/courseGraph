@@ -1,0 +1,14 @@
+{
+  "name": "coursegraph",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Graphs my course requirements",
+  "repository": "https://github.com/aarondill/courseGraph",
+  "license": "MIT",
+  "author": "aarondill <aaronsacks2006@gmail.com>",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.8.3"
+  }
+}

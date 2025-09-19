@@ -1,0 +1,8 @@
+{
+  "courses": {
+    "ECS 1100": "Intro to Engineering and CS"
+  },
+  "taken": {
+    "Fall 2025": ["ECS 1100"]
+  }
+}
