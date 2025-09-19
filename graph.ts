@@ -1,6 +1,7 @@
+import { execSync } from "node:child_process";
 import fs from "node:fs/promises";
 type json = {
-  courses: Record<string, string>; // course code -> course name
+  courses: Record<string, { name: string; reqs: string[] }>; // course code -> {course name, prerequisite codes}
   taken: Record<string, string[]>; // semester -> course code[]
 };
 const json = JSON.parse(await fs.readFile("./courses.json", "utf8")) as json;
@@ -42,4 +43,5 @@ const output = `strict digraph graph_name {
 }
 `;
 
-fs.writeFile("./graph.gv", output);
+fs.writeFile("./out.gv", output);
+execSync("dot -Tsvg out.gv -o out.svg");
