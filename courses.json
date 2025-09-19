@@ -91,9 +91,9 @@
       "name": "SE Technical Elective",
       "reqs": ["CS 2337", "SE 3354"]
     },
-    "CS 4394": {
-      "name": "SE Technical Elective - CHANGE ME",
-      "reqs": ["SE 4348"]
+    "CS 4384": {
+      "name": "SE Technical Elective",
+      "reqs": ["CS 2305"]
     },
     "RHET 1302": { "name": "Core: 010" },
     "GOVT 2305": { "name": "Core: 070" },
