@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "The metadata for the exercise",
+  "type": "object",
+  "required": ["courses", "taken", "degree"],
+  "properties": {
+    "degree": {
+      "type": "string",
+      "description": "The degree being studied"
+    },
+    "courses": {
+      "type": "object",
+      "description": "Courses required for the degree",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "description": "Course metadata",
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "reqs": {
+              "type": "array",
+              "description": "Course requirements",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "taken": {
+      "type": "object",
+      "description": "Courses already taken in each semester",
+      "patternProperties": {
+        ".*": {
+          "type": "array",
+          "description": "Courses taken in semester",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}
