@@ -5,6 +5,10 @@
   "required": ["courses", "taken", "degree"],
   "additionalProperties": false,
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The JSON schema being used"
+    },
     "degree": {
       "type": "string",
       "description": "The degree being studied"
@@ -12,7 +16,11 @@
     "courses": {
       "type": "object",
       "description": "Courses required for the degree",
-      "patternProperties": { "^//.*": { "type": "null" } },
+      "patternProperties": {
+        "^//.*": {
+          "anyOf": [{ "type": "null" }, { "type": "object" }]
+        }
+      },
       "additionalProperties": {
         "type": "object",
         "description": "Course metadata",
