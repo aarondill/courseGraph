@@ -12,6 +12,7 @@
     "courses": {
       "type": "object",
       "description": "Courses required for the degree",
+      "patternProperties": { "^//.*": { "type": "null" } },
       "additionalProperties": {
         "type": "object",
         "description": "Course metadata",

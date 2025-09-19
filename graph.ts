@@ -7,6 +7,11 @@ type json = {
   taken: Record<string, string[]>; // semester -> course code[]
 };
 const json = JSON.parse(await fs.readFile("./courses.json", "utf8")) as json;
+// Comments are allowed in the properties of "courses". Remove any keys that start with "//"
+json.courses = Object.fromEntries(
+  Object.entries(json.courses).filter(([k]) => !k.startsWith("//"))
+);
+
 const courseToSemester = Object.entries(json.taken).reduce(
   (acc, [semester, courses]) => {
     courses.forEach(course => acc.set(course, semester));
