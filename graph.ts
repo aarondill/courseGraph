@@ -25,10 +25,9 @@ function esc(strings: TemplateStringsArray | string, ...values: any[]) {
 
 const nodes = Object.entries(json.courses)
   .map(([id, { name, reqs }]) => {
-    // const semester = courseToSemester.has(id)
-    //   ? " - " + courseToSemester.get(id)!
-    //   : "";
-    const semester = "";
+    const semester = courseToSemester.has(id)
+      ? " - " + courseToSemester.get(id)!
+      : "";
     const allPrereqsMet = reqs?.every(req => courseToSemester.has(req)) ?? true;
     const color = courseToSemester.has(id)
       ? `, fillcolor = "lightgreen"`
