@@ -34,13 +34,19 @@ const nodes = Object.entries(json.courses)
       ? " - " + courseToSemester.get(id)!
       : "";
     const allPrereqsMet = reqs?.every(req => courseToSemester.has(req)) ?? true;
+    const isFastTrackPrereq =
+      id == "FAST TRACK" || json.courses["FAST TRACK"]?.reqs?.includes(id);
+    const outlineColor = isFastTrackPrereq ? "red" : "";
     const color = courseToSemester.has(id)
-      ? `, fillcolor = "lightgreen"`
+      ? "lightgreen"
       : allPrereqsMet
-        ? ", fillcolor = yellow"
+        ? "yellow"
         : "";
     const ret =
-      esc`"${id}" [ label = "\\N${semester}\\n${name}"` + color + ` ];`;
+      esc`"${id}" [ label = "\\N${semester}\\n${name}"` +
+      (color ? esc`, fillcolor = "${color}"` : "") +
+      (outlineColor ? esc`, color = "${outlineColor}", penwidth = 7` : "") +
+      `];`;
     if (!reqs || reqs.length === 0) return ret;
     return ret + esc`\n{"` + reqs.map(esc).join('", "') + `"} -> "${id}";`;
   })
