@@ -20,7 +20,7 @@
       "reqs": ["CS 1337", "CS 2305"]
     },
     "MATH 4332": {
-      "name": "Math Elective - Scientific Computing using Python",
+      "name": "Math Elective",
       "reqs": ["MATH 2414"]
     },
     "PHYS 2326": {
@@ -80,31 +80,31 @@
       "reqs": ["SE 4381", "SE 4352", "SE 4351", "SE 4367"]
     },
     "CS 4397": {
-      "name": "SE Technical Elective - Embedded Computer Systems",
+      "name": "SE Technical Elective",
       "reqs": ["SE 4348"]
     },
     "CS 4337": {
-      "name": "SE Technical Elective - Programming Languages Paradigms",
+      "name": "SE Technical Elective",
       "reqs": ["SE 2340", "CS 2305", "CS 2337"]
     },
     "SE 4376": {
-      "name": "SE Technical Elective - Object Oriented Design",
+      "name": "SE Technical Elective",
       "reqs": ["CS 2337", "SE 3354"]
     },
     "CS 4394": {
-      "name": "SE Technical Elective - Implementation of Modern Operating Systems",
+      "name": "SE Technical Elective - CHANGE ME",
       "reqs": ["SE 4348"]
     },
-    "RHET 1302": { "name": "Communication (Core: 010)" },
-    "GOVT 2305": { "name": "Government/ Political Science (Core: 070)" },
-    "GOVT 2306": { "name": "Government/ Political Science (Core: 070)" },
-    "HIST 1301": { "name": "American History (Core: 060)" },
-    "HIST 1302": { "name": "American History (Core: 060)" },
-    "HIST 2322": { "name": "Language, Philosophy and Culture (Core: 040)" },
-    "THEA 1310": { "name": "Creative Arts (Core: 050)" },
-    "GEOG 2303": { "name": "Social Behavioral Science (Core: 080)" },
-    "MATH 1316": { "name": "Free Elective - Trigonometry" },
-    "RHET 1301": { "name": "Free Elective - Rhetoric 1" },
+    "RHET 1302": { "name": "Core: 010" },
+    "GOVT 2305": { "name": "Core: 070" },
+    "GOVT 2306": { "name": "Core: 070" },
+    "HIST 1301": { "name": "Core: 060" },
+    "HIST 1302": { "name": "Core: 060" },
+    "HIST 2322": { "name": "Core: 040" },
+    "THEA 1310": { "name": "Core: 050" },
+    "GEOG 2303": { "name": "Core: 080" },
+    "MATH 1316": { "name": "Free Elective" },
+    "RHET 1301": { "name": "Free Elective" },
     "MATH 2312": { "name": "Precalculus" }
   },
   "taken": {
