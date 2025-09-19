@@ -79,6 +79,6 @@ if (ext == "gv") {
   // Otherwise, run dot with the output as it's stdin to create the desired output format
   cp.spawnSync("dot", [`-T${ext}`, "-o", outputFile], {
     input: output,
-    stdio: "inherit",
+    stdio: ["pipe", "inherit", "inherit"],
   });
 }
