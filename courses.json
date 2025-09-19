@@ -105,7 +105,20 @@
     "GEOG 2303": { "name": "Core: 080" },
     "MATH 1316": { "name": "Free Elective" },
     "RHET 1301": { "name": "Free Elective" },
-    "MATH 2312": { "name": "Precalculus" }
+    "MATH 2312": { "name": "Precalculus" },
+    "FAST TRACK": {
+      "name": "Fast Track Program Benchmark Courses",
+      "reqs": [
+        "SE 2340",
+        "SE 3306",
+        "SE 3345",
+        "SE 3354",
+        "SE 4367",
+        "SE 4348",
+        "SE 4351",
+        "SE 4352"
+      ]
+    }
   },
   "taken": {
     "Transfer": [
