@@ -17,17 +17,23 @@ json.courses = Object.fromEntries(
   Object.entries(json.courses).filter(([k]) => !k.startsWith("//"))
 );
 
-for (const [id, v] of Object.entries(json["Fast Track"] ?? {})) {
-  json.courses[id] = v; // merge in the fast track course
-  if (!v.replaces) continue;
-  const replaced = json.courses[v.replaces];
-  if (!replaced) throw new Error(`FAST TRACK course ${v.replaces} not found`);
-  v.reqs = [...new Set([...(v.reqs ?? []), ...(replaced.reqs ?? [])])]; // Combine and deduplicate requirements
-  for (const course of Object.values(json.courses)) {
-    // Replace all instances of the course that is being replaced with the new course
-    course.reqs = course.reqs?.map(req => (req == v.replaces ? id : req));
+{
+  // Fast Track
+  for (const [id, v] of Object.entries(json["Fast Track"] ?? {}).filter(
+    ([k]) => !k.startsWith("//")
+  )) {
+    json.courses[id] = v; // merge in the fast track course
+    if (!v.replaces) continue;
+    const replaced = json.courses[v.replaces];
+    if (!replaced) throw new Error(`FAST TRACK course ${v.replaces} not found`);
+    v.reqs = [...new Set([...(v.reqs ?? []), ...(replaced.reqs ?? [])])]; // Combine and deduplicate requirements
+    for (const course of Object.values(json.courses)) {
+      // Replace all instances of the course that is being replaced with the new course
+      course.reqs = course.reqs?.map(req => (req == v.replaces ? id : req));
+    }
+    delete json.courses[v.replaces];
   }
-  delete json.courses[v.replaces];
+  delete json["Fast Track"];
 }
 
 const courseToSemester = Object.entries(json.taken).reduce(
