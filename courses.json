@@ -48,7 +48,7 @@
     },
     "SE 3354": {
       "name": "Software Engineering",
-      "reqs": ["CS 2305", "CS 2336", "ECS 2390"]
+      "reqs": ["CS 2305", "CS 2337", "ECS 2390"]
     },
     "SE 4348": {
       "name": "Operating Systems Concepts",
@@ -103,8 +103,9 @@
     "HIST 2322": { "name": "Language, Philosophy and Culture (Core: 040)" },
     "THEA 1310": { "name": "Creative Arts (Core: 050)" },
     "GEOG 2303": { "name": "Social Behavioral Science (Core: 080)" },
-    "MATH 1316": { "name": "Free Elective - Precalculus" },
-    "RHET 1301": { "name": "Free Elective - Rhetoric 1" }
+    "MATH 1316": { "name": "Free Elective - Trigonometry" },
+    "RHET 1301": { "name": "Free Elective - Rhetoric 1" },
+    "MATH 2312": { "name": "Precalculus" }
   },
   "taken": {
     "Transfer": [
