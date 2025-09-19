@@ -19,9 +19,9 @@
       "name": "Computer Architecture",
       "reqs": ["CS 1337", "CS 2305"]
     },
-    "MATH 4334": {
-      "name": "Math Elective - Numerical Analysis",
-      "reqs": ["CS 1337", "MATH 2418", "MATH 2451"]
+    "MATH 4332": {
+      "name": "Math Elective - Scientific Computing using Python",
+      "reqs": ["MATH 2414"]
     },
     "PHYS 2326": {
       "name": "Electromagnetism and Waves",
