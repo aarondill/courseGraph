@@ -1,7 +1,7 @@
 import cp from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { courseToSemester, json } from "./input.ts";
+import { courseToSemester, fastTrackRequirements, json } from "./input.ts";
 
 function esc(strings: TemplateStringsArray | string, ...values: any[]) {
   if (typeof strings === "string") return strings.replaceAll('"', '\\"');
@@ -18,7 +18,7 @@ const nodes = Object.entries(json.courses)
       : "";
     const allPrereqsMet = reqs?.every(req => courseToSemester.has(req)) ?? true;
     const isFastTrackPrereq =
-      id == "FAST TRACK" || json.courses["FAST TRACK"]?.reqs?.includes(id);
+      id == "FAST TRACK" || fastTrackRequirements?.includes(id);
     const outlineColor = isFastTrackPrereq ? "red" : "";
     const color = courseToSemester.has(id)
       ? "lightgreen"

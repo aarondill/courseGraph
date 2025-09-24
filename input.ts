@@ -18,6 +18,8 @@ json.courses = filterComments(json.courses);
 json.taken = filterComments(json.taken);
 json["Fast Track"] = filterComments(json["Fast Track"] ?? {});
 
+/** The requirements for the FAST TRACK course, exported because they are modified */
+const fastTrackBenchmarks = json["Fast Track"]["FAST TRACK"]?.reqs?.slice();
 {
   // Fast Track
   for (const [id, v] of Object.entries(json["Fast Track"] ?? {})) {
@@ -43,4 +45,29 @@ const courseToSemester = Object.entries(json.taken).reduce(
   new Map<string, string>()
 );
 
-export { courseToSemester, json };
+// Minimum dependency resolution
+/** The recursive dependencies for a course */
+const allDeps = new Map<string, Set<string>>();
+// Return the recursive dependencies for a course, excluding the immediate prerequisites
+function resolve(course: string): Set<string> {
+  if (allDeps.has(course)) return allDeps.get(course)!;
+  const courseInfo = json.courses[course];
+  if (!courseInfo) throw new Error(`Course ${course} not found`);
+  const subreqs = (courseInfo.reqs ?? [])
+    .map(resolve)
+    .reduce((acc, set) => acc.union(set), new Set<string>());
+  const prereqs = new Set(courseInfo.reqs);
+  const res = subreqs.union(prereqs);
+  allDeps.set(course, res);
+  return res;
+}
+Object.entries(json.courses).forEach(([id, course]) => {
+  const allSubReqs = (course.reqs ?? [])
+    .map(resolve)
+    .reduce((acc, set) => acc.union(set), new Set<string>());
+  const recursiveDeps = resolve(id);
+  // Remove any prerequisites that are also in the recursive dependencies (We already need them anyways)
+  course.reqs = [...recursiveDeps.difference(allSubReqs)];
+});
+
+export { courseToSemester, fastTrackBenchmarks as fastTrackRequirements, json };
