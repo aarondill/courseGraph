@@ -1,0 +1,19 @@
+name: Generate README
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  generate-readme:
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@master
+      - uses: tlylt/install-graphviz@v1
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "latest"
+      - run: node graph.ts output.svg
+
+      - name: Commit output.svg
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: Generate output.svg"
+          file_pattern: output.svg
