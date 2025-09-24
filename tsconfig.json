@@ -11,6 +11,7 @@
     "noUncheckedIndexedAccess": true,
     "module": "esnext",
     "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "incremental": true
   },

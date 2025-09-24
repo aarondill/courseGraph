@@ -1,50 +1,7 @@
 import cp from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
-type course = {
-  name: string;
-  reqs?: string[];
-};
-type json = {
-  degree: string; // Degree name
-  courses: Record<string, course>; // course code -> {course name, prerequisite codes}
-  taken: Record<string, string[]>; // semester -> course code[]
-  "Fast Track"?: Record<string, course & { replaces: string | null }>; // FAST TRACK course
-};
-const json = JSON.parse(await fs.readFile("./courses.json", "utf8")) as json;
-// Comments are allowed in the properties of "courses". Remove any keys that start with "//"
-const filterComments = <T extends Record<string, any>>(obj: T): T =>
-  Object.fromEntries(
-    Object.entries(obj).filter(([k]) => !k.startsWith("//"))
-  ) as T;
-json.courses = filterComments(json.courses);
-json.taken = filterComments(json.taken);
-json["Fast Track"] = filterComments(json["Fast Track"] ?? {});
-
-{
-  // Fast Track
-  for (const [id, v] of Object.entries(json["Fast Track"] ?? {})) {
-    json.courses[id] = v; // merge in the fast track course
-    if (!v.replaces) continue;
-    const replaced = json.courses[v.replaces];
-    if (!replaced) throw new Error(`FAST TRACK course ${v.replaces} not found`);
-    v.reqs = [...new Set([...(v.reqs ?? []), ...(replaced.reqs ?? [])])]; // Combine and deduplicate requirements
-    for (const course of Object.values(json.courses)) {
-      // Replace all instances of the course that is being replaced with the new course
-      course.reqs = course.reqs?.map(req => (req == v.replaces ? id : req));
-    }
-    delete json.courses[v.replaces];
-  }
-  delete json["Fast Track"];
-}
-
-const courseToSemester = Object.entries(json.taken).reduce(
-  (acc, [semester, courses]) => {
-    courses.forEach(course => acc.set(course, semester));
-    return acc;
-  },
-  new Map<string, string>()
-);
+import { courseToSemester, json } from "./input.ts";
 
 function esc(strings: TemplateStringsArray | string, ...values: any[]) {
   if (typeof strings === "string") return strings.replaceAll('"', '\\"');
