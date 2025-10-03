@@ -254,15 +254,15 @@
 <!-- CS 4384 -->
 <g id="node33" class="node">
 <title>CS 4384</title>
-<ellipse fill="#b2dfee" stroke="black" cx="1200.07" cy="-473.14" rx="110.12" ry="22.76"/>
-<text text-anchor="middle" x="1200.07" y="-476.94" font-family="Times,serif" font-size="14.00">CS 4384</text>
-<text text-anchor="middle" x="1200.07" y="-461.94" font-family="Times,serif" font-size="14.00">SE Technical Elective</text>
+<ellipse fill="#b2dfee" stroke="black" cx="1169.07" cy="-473.14" rx="110.12" ry="22.76"/>
+<text text-anchor="middle" x="1169.07" y="-476.94" font-family="Times,serif" font-size="14.00">CS 4384</text>
+<text text-anchor="middle" x="1169.07" y="-461.94" font-family="Times,serif" font-size="14.00">SE Technical Elective</text>
 </g>
 <!-- CS 2305&#45;&gt;CS 4384 -->
 <g id="edge39" class="edge">
 <title>CS 2305&#45;&gt;CS 4384</title>
-<path fill="none" stroke="black" d="M1140.4,-1126.35C1102.41,-1092.58 1032.84,-1023.07 1006.07,-946.27 999.45,-927.28 1005.09,-921.11 1006.07,-901.02 1010.96,-800.55 988.73,-768.34 1028.07,-675.76 1058.85,-603.31 1125.32,-537.64 1166.02,-502.05"/>
-<polygon fill="black" stroke="black" points="1168.51,-504.53 1173.79,-495.34 1163.94,-499.23 1168.51,-504.53"/>
+<path fill="none" stroke="black" d="M1140.4,-1126.35C1102.41,-1092.58 1032.84,-1023.07 1006.07,-946.27 995.86,-917 992.67,-771.59 1028.07,-675.76 1053.49,-606.93 1108.28,-539.69 1141.58,-502.9"/>
+<polygon fill="black" stroke="black" points="1144.17,-505.25 1148.34,-495.52 1139.01,-500.53 1144.17,-505.25"/>
 </g>
 <!-- CS 2337&#45;&gt;SE 3345 -->
 <g id="edge20" class="edge">
@@ -292,15 +292,15 @@
 <!-- SE 4348 -->
 <g id="node24" class="node">
 <title>SE 4348</title>
-<ellipse fill="#b2dfee" stroke="red" stroke-width="7" cx="2158.07" cy="-698.39" rx="148.48" ry="22.76"/>
-<text text-anchor="middle" x="2158.07" y="-702.19" font-family="Times,serif" font-size="14.00">SE 4348</text>
-<text text-anchor="middle" x="2158.07" y="-687.19" font-family="Times,serif" font-size="14.00">Operating Systems Concepts</text>
+<ellipse fill="#b2dfee" stroke="red" stroke-width="7" cx="2153.07" cy="-698.39" rx="148.48" ry="22.76"/>
+<text text-anchor="middle" x="2153.07" y="-702.19" font-family="Times,serif" font-size="14.00">SE 4348</text>
+<text text-anchor="middle" x="2153.07" y="-687.19" font-family="Times,serif" font-size="14.00">Operating Systems Concepts</text>
 </g>
 <!-- SE 2340&#45;&gt;SE 4348 -->
 <g id="edge26" class="edge">
 <title>SE 2340&#45;&gt;SE 4348</title>
-<path fill="none" stroke="black" d="M2162.58,-900.83C2161.69,-861.24 2159.81,-777.38 2158.78,-731.33"/>
-<polygon fill="black" stroke="black" points="2162.28,-731.21 2158.56,-721.29 2155.28,-731.37 2162.28,-731.21"/>
+<path fill="none" stroke="black" d="M2162.09,-900.83C2160.32,-861.24 2156.56,-777.38 2154.5,-731.33"/>
+<polygon fill="black" stroke="black" points="2157.99,-731.13 2154.05,-721.29 2151,-731.44 2157.99,-731.13"/>
 </g>
 <!-- PHYS 2126 -->
 <g id="node15" class="node">
@@ -337,21 +337,21 @@
 <!-- SE 4367 -->
 <g id="node28" class="node">
 <title>SE 4367</title>
-<ellipse fill="#b2dfee" stroke="red" stroke-width="7" cx="1830.07" cy="-698.39" rx="169.91" ry="22.76"/>
-<text text-anchor="middle" x="1830.07" y="-702.19" font-family="Times,serif" font-size="14.00">SE 4367</text>
-<text text-anchor="middle" x="1830.07" y="-687.19" font-family="Times,serif" font-size="14.00">Software Testing, Verif, Valid, QA</text>
+<ellipse fill="#b2dfee" stroke="red" stroke-width="7" cx="1816.07" cy="-698.39" rx="169.91" ry="22.76"/>
+<text text-anchor="middle" x="1816.07" y="-702.19" font-family="Times,serif" font-size="14.00">SE 4367</text>
+<text text-anchor="middle" x="1816.07" y="-687.19" font-family="Times,serif" font-size="14.00">Software Testing, Verif, Valid, QA</text>
 </g>
 <!-- SE 3306&#45;&gt;SE 4367 -->
 <g id="edge33" class="edge">
 <title>SE 3306&#45;&gt;SE 4367</title>
-<path fill="none" stroke="black" d="M1225.87,-902.54C1348.87,-861.18 1629.62,-766.79 1760.5,-722.78"/>
-<polygon fill="black" stroke="black" points="1761.68,-726.08 1770.04,-719.57 1759.45,-719.44 1761.68,-726.08"/>
+<path fill="none" stroke="black" d="M1224.9,-902.44C1345.2,-861.12 1618.81,-767.14 1747.17,-723.06"/>
+<polygon fill="black" stroke="black" points="1748.58,-726.27 1756.9,-719.71 1746.31,-719.65 1748.58,-726.27"/>
 </g>
 <!-- SE 3345&#45;&gt;SE 4348 -->
 <g id="edge27" class="edge">
 <title>SE 3345&#45;&gt;SE 4348</title>
-<path fill="none" stroke="black" d="M1629.27,-901.54C1738.37,-859.83 1980.95,-767.1 2095.66,-723.25"/>
-<polygon fill="black" stroke="black" points="2096.93,-726.51 2105.02,-719.67 2094.43,-719.97 2096.93,-726.51"/>
+<path fill="none" stroke="black" d="M1628.8,-901.54C1736.86,-859.88 1976.98,-767.29 2090.85,-723.38"/>
+<polygon fill="black" stroke="black" points="2092.4,-726.53 2100.48,-719.67 2089.89,-720 2092.4,-726.53"/>
 </g>
 <!-- SE 3345&#45;&gt;SE 4351 -->
 <g id="edge32" class="edge">
@@ -362,8 +362,8 @@
 <!-- SE 3377&#45;&gt;SE 4348 -->
 <g id="edge28" class="edge">
 <title>SE 3377&#45;&gt;SE 4348</title>
-<path fill="none" stroke="black" d="M2451,-901.24C2391.73,-860.4 2262.62,-771.44 2197.42,-726.51"/>
-<polygon fill="black" stroke="black" points="2199.26,-723.53 2189.04,-720.73 2195.29,-729.29 2199.26,-723.53"/>
+<path fill="none" stroke="black" d="M2450.52,-901.24C2390.34,-860.4 2259.24,-771.44 2193.03,-726.51"/>
+<polygon fill="black" stroke="black" points="2194.76,-723.45 2184.52,-720.73 2190.83,-729.25 2194.76,-723.45"/>
 </g>
 <!-- ECS 2390 -->
 <g id="node21" class="node">
@@ -407,34 +407,34 @@
 <!-- SE 3354&#45;&gt;SE 4367 -->
 <g id="edge34" class="edge">
 <title>SE 3354&#45;&gt;SE 4367</title>
-<path fill="none" stroke="black" d="M1921.2,-900.83C1903.17,-860.99 1864.87,-776.32 1844.12,-730.46"/>
-<polygon fill="black" stroke="black" points="1847.28,-728.96 1839.97,-721.29 1840.91,-731.85 1847.28,-728.96"/>
+<path fill="none" stroke="black" d="M1919.83,-900.83C1899.3,-860.99 1855.69,-776.32 1832.07,-730.46"/>
+<polygon fill="black" stroke="black" points="1835.04,-728.58 1827.35,-721.29 1828.82,-731.79 1835.04,-728.58"/>
 </g>
 <!-- CS 4397 -->
 <g id="node32" class="node">
 <title>CS 4397</title>
-<ellipse fill="#b2dfee" stroke="black" cx="2158.07" cy="-473.14" rx="110.12" ry="22.76"/>
-<text text-anchor="middle" x="2158.07" y="-476.94" font-family="Times,serif" font-size="14.00">CS 4397</text>
-<text text-anchor="middle" x="2158.07" y="-461.94" font-family="Times,serif" font-size="14.00">SE Technical Elective</text>
+<ellipse fill="#b2dfee" stroke="black" cx="2153.07" cy="-473.14" rx="110.12" ry="22.76"/>
+<text text-anchor="middle" x="2153.07" y="-476.94" font-family="Times,serif" font-size="14.00">CS 4397</text>
+<text text-anchor="middle" x="2153.07" y="-461.94" font-family="Times,serif" font-size="14.00">SE Technical Elective</text>
 </g>
 <!-- SE 4348&#45;&gt;CS 4397 -->
 <g id="edge38" class="edge">
 <title>SE 4348&#45;&gt;CS 4397</title>
-<path fill="none" stroke="black" d="M2158.07,-675.58C2158.07,-635.98 2158.07,-552.12 2158.07,-506.07"/>
-<polygon fill="black" stroke="black" points="2161.57,-506.04 2158.07,-496.04 2154.57,-506.04 2161.57,-506.04"/>
+<path fill="none" stroke="black" d="M2153.07,-675.58C2153.07,-635.98 2153.07,-552.12 2153.07,-506.07"/>
+<polygon fill="black" stroke="black" points="2156.57,-506.04 2153.07,-496.04 2149.57,-506.04 2156.57,-506.04"/>
 </g>
 <!-- FAST TRACK -->
 <g id="node42" class="node">
 <title>FAST TRACK</title>
-<ellipse fill="#b2dfee" stroke="red" stroke-width="7" cx="1830.07" cy="-473.14" rx="206.45" ry="22.76"/>
-<text text-anchor="middle" x="1830.07" y="-476.94" font-family="Times,serif" font-size="14.00">FAST TRACK</text>
-<text text-anchor="middle" x="1830.07" y="-461.94" font-family="Times,serif" font-size="14.00">Fast Track Program Benchmark Courses</text>
+<ellipse fill="#b2dfee" stroke="red" stroke-width="7" cx="1816.07" cy="-473.14" rx="206.45" ry="22.76"/>
+<text text-anchor="middle" x="1816.07" y="-476.94" font-family="Times,serif" font-size="14.00">FAST TRACK</text>
+<text text-anchor="middle" x="1816.07" y="-461.94" font-family="Times,serif" font-size="14.00">Fast Track Program Benchmark Courses</text>
 </g>
 <!-- SE 4348&#45;&gt;FAST TRACK -->
 <g id="edge40" class="edge">
 <title>SE 4348&#45;&gt;FAST TRACK</title>
-<path fill="none" stroke="black" d="M2126.91,-676.19C2067.07,-635.46 1936.14,-546.34 1870,-501.32"/>
-<polygon fill="black" stroke="black" points="1871.73,-498.26 1861.49,-495.53 1867.79,-504.05 1871.73,-498.26"/>
+<path fill="none" stroke="black" d="M2121.06,-676.19C2059.58,-635.46 1925.05,-546.34 1857.09,-501.32"/>
+<polygon fill="black" stroke="black" points="1858.62,-498.13 1848.35,-495.53 1854.76,-503.97 1858.62,-498.13"/>
 </g>
 <!-- GOVT 2305 -->
 <g id="node26" class="node">
@@ -452,60 +452,60 @@
 <!-- SE 4485 -->
 <g id="node29" class="node">
 <title>SE 4485</title>
-<ellipse fill="#b2dfee" stroke="black" cx="2078.07" cy="-22.63" rx="152.06" ry="22.76"/>
-<text text-anchor="middle" x="2078.07" y="-26.43" font-family="Times,serif" font-size="14.00">SE 4485</text>
-<text text-anchor="middle" x="2078.07" y="-11.43" font-family="Times,serif" font-size="14.00">Software Engineering Project</text>
+<ellipse fill="#b2dfee" stroke="black" cx="2060.07" cy="-22.63" rx="152.06" ry="22.76"/>
+<text text-anchor="middle" x="2060.07" y="-26.43" font-family="Times,serif" font-size="14.00">SE 4485</text>
+<text text-anchor="middle" x="2060.07" y="-11.43" font-family="Times,serif" font-size="14.00">Software Engineering Project</text>
 </g>
 <!-- SE 4351&#45;&gt;SE 4485 -->
 <g id="edge35" class="edge">
 <title>SE 4351&#45;&gt;SE 4485</title>
-<path fill="none" stroke="black" d="M1148.1,-675.79C1090.18,-603.45 918.66,-366.32 1035.07,-225.25 1145.93,-90.91 1660.99,-45.05 1923.45,-30.23"/>
-<polygon fill="black" stroke="black" points="1923.65,-33.73 1933.44,-29.68 1923.26,-26.74 1923.65,-33.73"/>
+<path fill="none" stroke="black" d="M1145.18,-675.77C1078.21,-603.85 880,-369.08 999.07,-225.25 1112.21,-88.59 1637.93,-43.79 1904.37,-29.73"/>
+<polygon fill="black" stroke="black" points="1904.72,-33.21 1914.52,-29.2 1904.35,-26.22 1904.72,-33.21"/>
 </g>
 <!-- SE 4367&#45;&gt;FAST TRACK -->
 <g id="edge41" class="edge">
 <title>SE 4367&#45;&gt;FAST TRACK</title>
-<path fill="none" stroke="black" d="M1830.07,-675.58C1830.07,-635.98 1830.07,-552.12 1830.07,-506.07"/>
-<polygon fill="black" stroke="black" points="1833.57,-506.04 1830.07,-496.04 1826.57,-506.04 1833.57,-506.04"/>
+<path fill="none" stroke="black" d="M1816.07,-675.58C1816.07,-635.98 1816.07,-552.12 1816.07,-506.07"/>
+<polygon fill="black" stroke="black" points="1819.57,-506.04 1816.07,-496.04 1812.57,-506.04 1819.57,-506.04"/>
 </g>
 <!-- SE 6388 -->
 <g id="node30" class="node">
 <title>SE 6388</title>
-<ellipse fill="#b2dfee" stroke="black" cx="2078.07" cy="-247.88" rx="156.04" ry="22.76"/>
-<text text-anchor="middle" x="2078.07" y="-251.68" font-family="Times,serif" font-size="14.00">SE 6388</text>
-<text text-anchor="middle" x="2078.07" y="-236.68" font-family="Times,serif" font-size="14.00">Software Project Management</text>
+<ellipse fill="#b2dfee" stroke="black" cx="2060.07" cy="-247.88" rx="156.04" ry="22.76"/>
+<text text-anchor="middle" x="2060.07" y="-251.68" font-family="Times,serif" font-size="14.00">SE 6388</text>
+<text text-anchor="middle" x="2060.07" y="-236.68" font-family="Times,serif" font-size="14.00">Software Project Management</text>
 </g>
 <!-- SE 6388&#45;&gt;SE 4485 -->
 <g id="edge36" class="edge">
 <title>SE 6388&#45;&gt;SE 4485</title>
-<path fill="none" stroke="black" d="M2078.07,-225.07C2078.07,-185.47 2078.07,-101.61 2078.07,-55.56"/>
-<polygon fill="black" stroke="black" points="2081.57,-55.53 2078.07,-45.53 2074.57,-55.53 2081.57,-55.53"/>
+<path fill="none" stroke="black" d="M2060.07,-225.07C2060.07,-185.47 2060.07,-101.61 2060.07,-55.56"/>
+<polygon fill="black" stroke="black" points="2063.57,-55.53 2060.07,-45.53 2056.57,-55.53 2063.57,-55.53"/>
 </g>
 <!-- SE 6362 -->
 <g id="node31" class="node">
 <title>SE 6362</title>
-<ellipse fill="#b2dfee" stroke="black" cx="2458.07" cy="-247.88" rx="222.98" ry="22.76"/>
-<text text-anchor="middle" x="2458.07" y="-251.68" font-family="Times,serif" font-size="14.00">SE 6362</text>
-<text text-anchor="middle" x="2458.07" y="-236.68" font-family="Times,serif" font-size="14.00">Architecture and Design (Approval Needed)</text>
+<ellipse fill="#b2dfee" stroke="black" cx="2449.07" cy="-247.88" rx="231.86" ry="22.76"/>
+<text text-anchor="middle" x="2449.07" y="-251.68" font-family="Times,serif" font-size="14.00">SE 6362</text>
+<text text-anchor="middle" x="2449.07" y="-236.68" font-family="Times,serif" font-size="14.00">Architecture and Design *(Approval Needed)*</text>
 </g>
 <!-- SE 6362&#45;&gt;SE 4485 -->
 <g id="edge37" class="edge">
 <title>SE 6362&#45;&gt;SE 4485</title>
-<path fill="none" stroke="black" d="M2421.63,-225.48C2351.66,-184.36 2198.68,-94.49 2122.71,-49.86"/>
-<polygon fill="black" stroke="black" points="2124.23,-46.69 2113.84,-44.64 2120.69,-52.73 2124.23,-46.69"/>
+<path fill="none" stroke="black" d="M2411.77,-225.48C2340.13,-184.36 2183.54,-94.49 2105.77,-49.86"/>
+<polygon fill="black" stroke="black" points="2107.1,-46.59 2096.68,-44.64 2103.61,-52.66 2107.1,-46.59"/>
 </g>
 <!-- CS 6371 -->
 <g id="node45" class="node">
 <title>CS 6371</title>
-<ellipse fill="#b2dfee" stroke="black" cx="1259.07" cy="-247.88" rx="226.96" ry="22.76"/>
-<text text-anchor="middle" x="1259.07" y="-251.68" font-family="Times,serif" font-size="14.00">CS 6371</text>
-<text text-anchor="middle" x="1259.07" y="-236.68" font-family="Times,serif" font-size="14.00">Programming Languages (Approval Needed)</text>
+<ellipse fill="#b2dfee" stroke="black" cx="1232.07" cy="-247.88" rx="236.35" ry="22.76"/>
+<text text-anchor="middle" x="1232.07" y="-251.68" font-family="Times,serif" font-size="14.00">CS 6371</text>
+<text text-anchor="middle" x="1232.07" y="-236.68" font-family="Times,serif" font-size="14.00">Programming Languages *(Approval Needed)*</text>
 </g>
 <!-- CS 4384&#45;&gt;CS 6371 -->
 <g id="edge45" class="edge">
 <title>CS 4384&#45;&gt;CS 6371</title>
-<path fill="none" stroke="black" d="M1205.83,-450.32C1216.32,-410.64 1238.55,-326.52 1250.7,-280.53"/>
-<polygon fill="black" stroke="black" points="1254.11,-281.35 1253.28,-270.78 1247.34,-279.56 1254.11,-281.35"/>
+<path fill="none" stroke="black" d="M1175.22,-450.32C1186.42,-410.64 1210.16,-326.52 1223.14,-280.53"/>
+<polygon fill="black" stroke="black" points="1226.54,-281.36 1225.89,-270.78 1219.8,-279.46 1226.54,-281.36"/>
 </g>
 <!-- GOVT 2306 -->
 <g id="node34" class="node">
@@ -566,46 +566,46 @@
 <!-- FAST TRACK&#45;&gt;SE 6388 -->
 <g id="edge47" class="edge">
 <title>FAST TRACK&#45;&gt;SE 6388</title>
-<path fill="none" stroke="black" d="M1854.3,-450.32C1899.42,-409.71 1996.27,-322.51 2046.46,-277.33"/>
-<polygon fill="black" stroke="black" points="2049.01,-279.75 2054.1,-270.46 2044.33,-274.54 2049.01,-279.75"/>
+<path fill="none" stroke="black" d="M1839.91,-450.32C1884.3,-409.71 1979.59,-322.51 2028.97,-277.33"/>
+<polygon fill="black" stroke="black" points="2031.47,-279.79 2036.49,-270.46 2026.75,-274.62 2031.47,-279.79"/>
 </g>
 <!-- FAST TRACK&#45;&gt;SE 6362 -->
 <g id="edge44" class="edge">
 <title>FAST TRACK&#45;&gt;SE 6362</title>
-<path fill="none" stroke="black" d="M1888.58,-451.33C2005.09,-409.91 2265.52,-317.33 2389.69,-273.19"/>
-<polygon fill="black" stroke="black" points="2391.22,-276.36 2399.47,-269.71 2388.87,-269.77 2391.22,-276.36"/>
+<path fill="none" stroke="black" d="M1874.77,-451.43C1992.01,-410.08 2254.64,-317.45 2379.96,-273.25"/>
+<polygon fill="black" stroke="black" points="2381.21,-276.53 2389.47,-269.9 2378.88,-269.93 2381.21,-276.53"/>
 </g>
 <!-- SE 6329 -->
 <g id="node43" class="node">
 <title>SE 6329</title>
-<ellipse fill="#b2dfee" stroke="black" cx="1608.07" cy="-247.88" rx="120.83" ry="22.76"/>
-<text text-anchor="middle" x="1608.07" y="-251.68" font-family="Times,serif" font-size="14.00">SE 6329</text>
-<text text-anchor="middle" x="1608.07" y="-236.68" font-family="Times,serif" font-size="14.00">Object Oriented Design</text>
+<ellipse fill="#b2dfee" stroke="black" cx="1590.07" cy="-247.88" rx="120.83" ry="22.76"/>
+<text text-anchor="middle" x="1590.07" y="-251.68" font-family="Times,serif" font-size="14.00">SE 6329</text>
+<text text-anchor="middle" x="1590.07" y="-236.68" font-family="Times,serif" font-size="14.00">Object Oriented Design</text>
 </g>
 <!-- FAST TRACK&#45;&gt;SE 6329 -->
 <g id="edge42" class="edge">
 <title>FAST TRACK&#45;&gt;SE 6329</title>
-<path fill="none" stroke="black" d="M1808.38,-450.32C1768.07,-409.79 1681.64,-322.87 1636.63,-277.61"/>
-<polygon fill="black" stroke="black" points="1639.05,-275.08 1629.52,-270.46 1634.09,-280.01 1639.05,-275.08"/>
+<path fill="none" stroke="black" d="M1793.98,-450.32C1752.95,-409.79 1664.97,-322.87 1619.15,-277.61"/>
+<polygon fill="black" stroke="black" points="1621.48,-274.99 1611.9,-270.46 1616.56,-279.97 1621.48,-274.99"/>
 </g>
 <!-- CS 6360 -->
 <g id="node44" class="node">
 <title>CS 6360</title>
-<ellipse fill="#b2dfee" stroke="black" cx="1825.07" cy="-247.88" rx="95.42" ry="22.76"/>
-<text text-anchor="middle" x="1825.07" y="-251.68" font-family="Times,serif" font-size="14.00">CS 6360</text>
-<text text-anchor="middle" x="1825.07" y="-236.68" font-family="Times,serif" font-size="14.00">Database Systems</text>
+<ellipse fill="#b2dfee" stroke="black" cx="1807.07" cy="-247.88" rx="95.42" ry="22.76"/>
+<text text-anchor="middle" x="1807.07" y="-251.68" font-family="Times,serif" font-size="14.00">CS 6360</text>
+<text text-anchor="middle" x="1807.07" y="-236.68" font-family="Times,serif" font-size="14.00">Database Systems</text>
 </g>
 <!-- FAST TRACK&#45;&gt;CS 6360 -->
 <g id="edge43" class="edge">
 <title>FAST TRACK&#45;&gt;CS 6360</title>
-<path fill="none" stroke="black" d="M1829.58,-450.32C1828.69,-410.73 1826.81,-326.87 1825.78,-280.82"/>
-<polygon fill="black" stroke="black" points="1829.28,-280.7 1825.56,-270.78 1822.28,-280.86 1829.28,-280.7"/>
+<path fill="none" stroke="black" d="M1815.19,-450.32C1813.59,-410.73 1810.21,-326.87 1808.35,-280.82"/>
+<polygon fill="black" stroke="black" points="1811.85,-280.63 1807.95,-270.78 1804.85,-280.92 1811.85,-280.63"/>
 </g>
 <!-- FAST TRACK&#45;&gt;CS 6371 -->
 <g id="edge46" class="edge">
 <title>FAST TRACK&#45;&gt;CS 6371</title>
-<path fill="none" stroke="black" d="M1776.6,-451.23C1671,-409.95 1436.09,-318.1 1322.72,-273.77"/>
-<polygon fill="black" stroke="black" points="1323.71,-270.4 1313.12,-270.02 1321.16,-276.92 1323.71,-270.4"/>
+<path fill="none" stroke="black" d="M1761.39,-451.23C1653.27,-409.9 1412.64,-317.91 1296.82,-273.63"/>
+<polygon fill="black" stroke="black" points="1297.94,-270.32 1287.35,-270.02 1295.44,-276.86 1297.94,-270.32"/>
 </g>
 <!-- degree -->
 <g id="node46" class="node">
