@@ -8,7 +8,7 @@
   "author": "aarondill <aaronsacks2006@gmail.com>",
   "type": "module",
   "scripts": {
-    "run": "node ./src/graph.ts",
+    "start": "node ./src/graph.ts",
     "plan": "node ./src/plan.ts"
   },
   "devDependencies": {
