@@ -70,6 +70,18 @@
       "patternProperties": {
         "^//.*": { "anyOf": [{ "type": "array" }, { "type": "string" }] }
       }
+    },
+    "future": {
+      "type": "object",
+      "description": "Courses planned to be taken in each semester. This is only used for the plan command",
+      "additionalProperties": {
+        "type": "array",
+        "description": "Courses taken in semester",
+        "items": { "type": "string" }
+      },
+      "patternProperties": {
+        "^//.*": { "anyOf": [{ "type": "array" }, { "type": "string" }] }
+      }
     }
   }
 }
