@@ -66,7 +66,7 @@ const output = `strict digraph graph_name {
 }
 `;
 
-const outputFile = process.argv[2] || "out.svg";
+const outputFile = process.argv[2] || "output.svg";
 const ext = path.basename(outputFile).split(".").pop();
 if (ext == "gv") {
   // if the user wants the graph, give it to them
