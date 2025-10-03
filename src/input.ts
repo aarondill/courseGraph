@@ -4,6 +4,7 @@ type CourseInfo = {
   degree: string; // Degree name
   courses: Record<string, Course>; // course code -> {course name, prerequisite codes}
   taken: Record<string, string[]>; // semester -> course code[]
+  future: Record<string, string[]>; // semester -> course code[]
   "Fast Track"?: Record<string, Course & { replaces: string | null }>; // FAST TRACK course
 };
 // Comments are allowed in the properties of "courses". Remove any keys that start with "//"
@@ -16,6 +17,7 @@ const json = JSON.parse(
 ) as CourseInfo;
 json.courses = filterComments(json.courses);
 json.taken = filterComments(json.taken);
+json.future = filterComments(json.future);
 json["Fast Track"] = filterComments(json["Fast Track"] ?? {});
 
 /** The requirements for the FAST TRACK course, exported because they are modified */
