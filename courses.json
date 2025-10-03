@@ -133,12 +133,12 @@
       "replaces": "SE 4347"
     },
     "SE 6362": {
-      "name": "Architecture and Design (Approval Needed)",
+      "name": "Architecture and Design *(Approval Needed)*",
       "reqs": ["FAST TRACK", "SE 3354"],
       "replaces": "SE 4352"
     },
     "CS 6371": {
-      "name": "Programming Languages (Approval Needed)",
+      "name": "Programming Languages *(Approval Needed)*",
       "reqs": ["FAST TRACK", "SE 3345", "CS 4384"],
       "replaces": "CS 4337"
     },
