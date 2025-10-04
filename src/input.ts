@@ -1,82 +1,149 @@
 import fs from "node:fs/promises";
-export type Course = { name: string; reqs?: string[] };
-type CourseInfo = {
-  degree: string; // Degree name
-  courses: Record<string, Course>; // course code -> {course name, prerequisite codes}
-  taken: Record<string, string[]>; // semester -> course code[]
-  future: Record<string, string[]>; // semester -> course code[]
-  "Fast Track"?: Record<string, Course & { replaces: string | null }>; // FAST TRACK course
+import { objectEntries } from "tsafe/objectEntries";
+
+export type CourseCode = `${string} ${string}`;
+export type Semester = `${string} ${number}` | "transfer"; // "Fall 2025"
+
+export type Course = {
+  /** The course code */
+  id: CourseCode;
+  /** The Human-readable name of the course */
+  name: string;
+  /** The prerequisites for this course */
+  reqs: Set<CourseCode>;
+  /** If this is a replacement for another course, the name of the course that it is replacing */
+  replacementFor?: CourseCode;
+  /** If this is a benchmark for the FAST TRACK course, also includes the FAST TRACK course itself */
+  isFastTrackBenchmark: boolean;
 };
-// Comments are allowed in the properties of "courses". Remove any keys that start with "//"
+
+type CourseInput = { name: string; reqs?: CourseCode[] };
+type CourseInputFT = CourseInput & { replaces: CourseCode | null };
+type JSONInput = {
+  /** Degree name */
+  degree: string;
+  courses: Record<CourseCode, CourseInput>;
+  taken: Record<Semester, CourseCode[]>;
+  future: Record<Semester, CourseCode[]>;
+  /** FAST TRACK course */
+  "Fast Track"?: Record<CourseCode, CourseInputFT>;
+};
+// Comments are allowed in properties. Remove any keys that start with "//"
 const filterComments = <T extends Record<string, any>>(obj: T): T =>
   Object.fromEntries(
-    Object.entries(obj).filter(([k]) => !k.startsWith("//"))
+    Object.entries(obj ?? {}).filter(([k]) => !k.startsWith("//"))
   ) as T;
-const json = JSON.parse(
-  await fs.readFile("./courses.json", "utf8")
-) as CourseInfo;
-json.courses = filterComments(json.courses);
-json.taken = filterComments(json.taken);
-json.future = filterComments(json.future);
-json["Fast Track"] = filterComments(json["Fast Track"] ?? {});
 
-/** The requirements for the FAST TRACK course, exported because they are modified */
-const fastTrackBenchmarks = json["Fast Track"]["FAST TRACK"]?.reqs?.slice();
+const json = ((contents: string): Required<JSONInput> => {
+  const parsed = JSON.parse(contents) as JSONInput;
+  const degree = parsed.degree,
+    courses = filterComments(parsed.courses),
+    taken = filterComments(parsed.taken),
+    future = filterComments(parsed.future),
+    fastTrack = filterComments(parsed["Fast Track"] ?? {});
+  return { degree, courses, taken, future, "Fast Track": fastTrack };
+})(await fs.readFile("./courses.json", "utf8"));
+
+export type Plan = {
+  taken: Map<Semester, Set<CourseCode>>;
+  future: Map<Semester, Set<CourseCode>>;
+  courseToSemester: Map<CourseCode, Semester>;
+};
+const plan: Plan = {
+  taken: objectEntries(json.taken).reduce(
+    (acc, [semester, courses]) => acc.set(semester, new Set(courses)),
+    new Map<Semester, Set<CourseCode>>()
+  ),
+  future: objectEntries(json.future).reduce(
+    (acc, [semester, courses]) => acc.set(semester, new Set(courses)),
+    new Map<Semester, Set<CourseCode>>()
+  ),
+  courseToSemester: objectEntries(json.taken).reduce(
+    (acc, [semester, courses]) => {
+      courses.forEach(course => acc.set(course, semester));
+      return acc;
+    },
+    new Map<CourseCode, Semester>()
+  ),
+};
+const degreeName = json.degree;
+
+// A copy of the exact requirements for the FAST TRACK course (no deduplication)
+const fastTrackBenchmarks = new Set(json["Fast Track"]["FAST TRACK"]?.reqs).add(
+  "FAST TRACK"
+);
+// Passed from Object.entries()
+const makeCourse = ([id, course]: [
+  CourseCode,
+  CourseInput | CourseInputFT,
+]): Course => {
+  const { name, reqs } = course;
+  const replacementFor = ("replaces" in course && course.replaces) || undefined;
+  const isFastTrackBenchmark = fastTrackBenchmarks.has(id);
+  return {
+    id,
+    name,
+    reqs: new Set(reqs ?? []),
+    replacementFor,
+    isFastTrackBenchmark,
+  };
+};
+
+const courses = objectEntries(json.courses)
+  .map(makeCourse)
+  .reduce(
+    (acc, course) => acc.set(course.id, course),
+    new Map<string, Course>()
+  );
+
 // Fast Track
 {
-  const replacementCourseIds = new Map<string, string>(); // Maps from course to the course that it is being replaced by
-
-  for (const [id, v] of Object.entries(json["Fast Track"] ?? {})) {
-    json.courses[id] = v; // merge in the fast track course
-    if (!v.replaces) continue;
-    const old = json.courses[v.replaces];
-    if (!old) throw new Error(`FAST TRACK course ${v.replaces} not found`);
-    v.name += ` (${v.replaces})`; // Add the name of the course that is being replaced
-    v.reqs = [...new Set([...(v.reqs ?? []), ...(old.reqs ?? [])])]; // Combine and deduplicate requirements
-    replacementCourseIds.set(v.replaces, id);
-    delete json.courses[v.replaces];
+  const replacementCourses = new Set<Course>();
+  for (const c of objectEntries(json["Fast Track"]).map(makeCourse)) {
+    if (c.replacementFor) {
+      replacementCourses.add(c);
+      const old = courses.get(c.replacementFor);
+      if (!old) throw new Error(`course ${c.replacementFor} not found`);
+      c.reqs = c.reqs.union(old.reqs); // Combine and deduplicate requirements
+      courses.delete(c.replacementFor);
+    }
+    courses.set(c.id, c); // merge in the fast track course
   }
   // Delay this in case one of the replacements depends on another.
-  for (const [id, replacement] of replacementCourseIds) {
+  for (const c of replacementCourses) {
     // Replace all instances of id with the replacement
-    for (const course of Object.values(json.courses)) {
-      course.reqs = course.reqs?.map(r => (r == id ? replacement : r));
+    for (const course of courses.values()) {
+      if (!c.replacementFor)
+        throw new Error("No replacementfor found! This is a bug");
+      if (course.reqs.delete(c.replacementFor)) course.reqs.add(c.id);
     }
   }
-  delete json["Fast Track"];
 }
-
-const courseToSemester = Object.entries(json.taken).reduce(
-  (acc, [semester, courses]) => {
-    courses.forEach(course => acc.set(course, semester));
-    return acc;
-  },
-  new Map<string, string>()
-);
 
 // Minimum dependency resolution
 /** The recursive dependencies for a course */
-const allDeps = new Map<string, Set<string>>();
+const allDeps = new Map<CourseCode, Set<CourseCode>>();
 // Return the recursive dependencies for a course, excluding the immediate prerequisites
-function resolve(course: string): Set<string> {
+function resolve(course: CourseCode): Set<CourseCode> {
   if (allDeps.has(course)) return allDeps.get(course)!;
-  const courseInfo = json.courses[course];
+  const courseInfo = courses.get(course);
   if (!courseInfo) throw new Error(`Course ${course} not found`);
-  const subreqs = (courseInfo.reqs ?? [])
+  const subreqs = courseInfo.reqs
+    .values()
     .map(resolve)
-    .reduce((acc, set) => acc.union(set), new Set<string>());
-  const prereqs = new Set(courseInfo.reqs);
-  const res = subreqs.union(prereqs);
+    .reduce((acc, set) => acc.union(set), new Set<CourseCode>());
+  const res = subreqs.union(courseInfo.reqs);
   allDeps.set(course, res);
   return res;
 }
-Object.entries(json.courses).forEach(([id, course]) => {
-  const allSubReqs = (course.reqs ?? [])
+courses.forEach(course => {
+  const allSubReqs = course.reqs
+    .values()
     .map(resolve)
     .reduce((acc, set) => acc.union(set), new Set<string>());
-  const recursiveDeps = resolve(id);
+  const recursiveDeps = resolve(course.id);
   // Remove any prerequisites that are also in the recursive dependencies (We already need them anyways)
-  course.reqs = [...recursiveDeps.difference(allSubReqs)];
+  course.reqs = recursiveDeps.difference(allSubReqs);
 });
 
-export { courseToSemester, fastTrackBenchmarks as fastTrackRequirements, json };
+export { courses, degreeName, plan };

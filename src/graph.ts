@@ -1,7 +1,7 @@
 import cp from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { courseToSemester, fastTrackRequirements, json } from "./input.ts";
+import { courses, degreeName, plan } from "./input.ts";
 
 function esc(strings: TemplateStringsArray | string, ...values: any[]) {
   if (typeof strings === "string") return strings.replaceAll('"', '\\"');
@@ -11,36 +11,46 @@ function esc(strings: TemplateStringsArray | string, ...values: any[]) {
   );
 }
 
-const nodes = Object.entries(json.courses)
-  .map(([id, { name, reqs }]) => {
-    const semester = courseToSemester.has(id)
-      ? " - " + courseToSemester.get(id)!
+const nodes = courses
+  .values()
+  .map(c => {
+    const semester = plan.courseToSemester.has(c.id)
+      ? " - " + plan.courseToSemester.get(c.id)!
       : "";
-    const allPrereqsMet = reqs?.every(req => courseToSemester.has(req)) ?? true;
-    const isFastTrackPrereq =
-      id == "FAST TRACK" || fastTrackRequirements?.includes(id);
+    const allPrereqsMet = c.reqs
+      .values()
+      .every(req => plan.courseToSemester.has(req));
+    const isFastTrackPrereq = c.isFastTrackBenchmark;
     const outlineColor = isFastTrackPrereq ? "red" : "";
-    const color = courseToSemester.has(id)
+    const color = plan.courseToSemester.has(c.id)
       ? "lightgreen"
       : allPrereqsMet
         ? "yellow"
         : "";
     const ret =
-      esc`"${id}" [ label = "\\N${semester}\\n${name}"` +
+      esc`"${c.id}" [ label = "\\N${semester}\\n${c.name}"` +
       (color ? esc`, fillcolor = "${color}"` : "") +
       (outlineColor ? esc`, color = "${outlineColor}", penwidth = 7` : "") +
       `];`;
-    if (!reqs || reqs.length === 0) return ret;
-    return ret + esc`\n{"` + reqs.map(esc).join('", "') + `"} -> "${id}";`;
+    if (c.reqs.size === 0) return ret;
+    return (
+      ret +
+      esc`\n{"` +
+      c.reqs.values().map(esc).toArray().join('", "') +
+      `"} -> "${c.id}";`
+    );
   })
+  .toArray()
   .join("\n");
 
 // Course IDs that have no prerequisites - Connect them to the root node
-const noPrereqs = Object.keys(json.courses).filter(
-  id => !json.courses[id]?.reqs?.length
-);
+const noPrereqs = courses
+  .values()
+  .filter(c => c.reqs.size === 0)
+  .map(c => c.id)
+  .toArray();
 const root =
-  esc`degree [ label = "${json.degree}", fillcolor = "orangered" ];` +
+  esc`degree [ label = "${degreeName}", fillcolor = "orangered" ];` +
   `degree -> {"${noPrereqs.map(esc).join('", "')}"};`;
 
 const output = `strict digraph graph_name {
