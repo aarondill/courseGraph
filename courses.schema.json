@@ -1,6 +1,71 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "description": "The metadata for the exercise",
+  "description": "The metadata for the courses",
+
+  "definitions": {
+    "CommentContent": {
+      "description": "The content of a comment",
+      "anyOf": [{ "type": "object" }, { "type": "string" }, { "type": "array" }]
+    },
+    "CourseCode": {
+      "type": "string",
+      "pattern": "^\\w+ \\w+$",
+      "description": "The course code"
+    },
+    "CourseInput": {
+      "type": "object",
+      "description": "Course metadata",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "reqs": {
+          "type": "array",
+          "description": "Course requirements",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/CourseCode"
+          }
+        }
+      }
+    },
+    "CourseInputFT": {
+      "allOf": [
+        {
+          "required": ["replaces"],
+          "properties": {
+            "replaces": {
+              "anyOf": [
+                { "$ref": "#/definitions/CourseCode" },
+                { "type": "null" }
+              ]
+            }
+          }
+        },
+        { "$ref": "#/definitions/CourseInput" }
+      ]
+    },
+    "SemesterCourseMapInput": {
+      "type": "object",
+      "description": "Courses per semester (YYYY Semester, e.g. 2018 Fall)",
+      "additionalProperties": false,
+      "properties": {
+        "Transfer": {
+          "type": "array",
+          "description": "Courses transferred from other schools",
+          "items": { "$ref": "#/definitions/CourseCode" }
+        }
+      },
+      "patternProperties": {
+        "^//.*": { "$ref": "#/definitions/CommentContent" },
+        "^\\d{4} (Fall|Spring|Summer)$": {
+          "type": "array",
+          "description": "Courses taken in semester",
+          "items": { "$ref": "#/definitions/CourseCode" }
+        }
+      }
+    }
+  },
+
   "type": "object",
   "required": ["courses", "taken", "degree"],
   "additionalProperties": false,
@@ -11,77 +76,25 @@
     },
     "degree": {
       "type": "string",
-      "description": "The degree being studied"
-    },
-    "Fast Track": {
-      "type": "object",
-      "description": "Courses taking for fast track program",
-      "patternProperties": {
-        "^//.*": { "anyOf": [{ "type": "object" }, { "type": "string" }] }
-      },
-      "additionalProperties": {
-        "type": "object",
-        "description": "Course metadata",
-        "required": ["name", "replaces"],
-        "additionalProperties": false,
-        "properties": {
-          "name": { "type": "string" },
-          "replaces": {
-            "description": "Course that this replaces",
-            "anyOf": [{ "type": "string" }, { "type": "null" }]
-          },
-          "reqs": {
-            "type": "array",
-            "description": "Course requirements",
-            "items": { "type": "string" }
-          }
-        }
-      }
+      "description": "The name of the degree being studied"
     },
     "courses": {
       "type": "object",
       "description": "Courses required for the degree",
       "patternProperties": {
-        "^//.*": { "anyOf": [{ "type": "object" }, { "type": "string" }] }
-      },
-      "additionalProperties": {
-        "type": "object",
-        "description": "Course metadata",
-        "required": ["name"],
-        "additionalProperties": false,
-        "properties": {
-          "name": { "type": "string" },
-          "reqs": {
-            "type": "array",
-            "description": "Course requirements",
-            "items": { "type": "string" }
-          }
-        }
+        "^//.*": { "$ref": "#/definitions/CommentContent" },
+        "\\w+ \\w+": { "$ref": "#/definitions/CourseInput" }
       }
     },
-    "taken": {
+    "Fast Track": {
       "type": "object",
-      "description": "Courses already taken in each semester",
-      "additionalProperties": {
-        "type": "array",
-        "description": "Courses taken in semester",
-        "items": { "type": "string" }
-      },
+      "description": "Courses taking for fast track program",
       "patternProperties": {
-        "^//.*": { "anyOf": [{ "type": "array" }, { "type": "string" }] }
+        "^//.*": { "$ref": "#/definitions/CommentContent" },
+        "\\w+ \\w+": { "$ref": "#/definitions/CourseInputFT" }
       }
     },
-    "future": {
-      "type": "object",
-      "description": "Courses planned to be taken in each semester. This is only used for the plan command",
-      "additionalProperties": {
-        "type": "array",
-        "description": "Courses taken in semester",
-        "items": { "type": "string" }
-      },
-      "patternProperties": {
-        "^//.*": { "anyOf": [{ "type": "array" }, { "type": "string" }] }
-      }
-    }
+    "taken": { "$ref": "#/definitions/SemesterCourseMapInput" },
+    "future": { "$ref": "#/definitions/SemesterCourseMapInput" }
   }
 }
