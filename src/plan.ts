@@ -17,7 +17,11 @@ function printPlan(all: Map<Semester, Set<CourseCode>>) {
     for (const id of totake) {
       const course = courses.get(id);
       if (!course) throw new Error(`Course ${id} not found`);
-      let output = `  - ${id}: ${course?.name}`;
+      let output = `  - ${id}:`;
+
+      if (course.replacementFor) output += ` (${course.replacementFor})`;
+
+      output += ` ${course?.name}`;
 
       if (course.isFastTrackBenchmark) {
         output += " *<u>(Fast Track Benchmark)</u>*";
