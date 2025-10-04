@@ -58,13 +58,13 @@
       "name": "Professional Responsibility in CS/SE",
       "reqs": ["ECS 2390", "GOVT 2305"]
     },
-    "SE 4347": { "name": "Database Systems (CS 6360)", "reqs": ["SE 3345"] },
+    "SE 4347": { "name": "Database Systems", "reqs": ["SE 3345"] },
     "SE 4381": {
-      "name": "Software Project Planning & Mgmt. (SE 6388)",
+      "name": "Software Project Planning & Mgmt.",
       "reqs": ["SE 3354"]
     },
     "SE 4352": {
-      "name": "Software Architecture & Design (CS 6362)",
+      "name": "Software Architecture & Design",
       "reqs": ["SE 3306", "SE 3345"]
     },
     "SE 4351": {
@@ -84,11 +84,11 @@
       "reqs": ["SE 4348"]
     },
     "CS 4337": {
-      "name": "SE Technical Elective (CS 6371)",
+      "name": "SE Technical Elective",
       "reqs": ["SE 2340", "CS 2305", "CS 2337"]
     },
     "SE 4376": {
-      "name": "SE Technical Elective (SE 6329)",
+      "name": "SE Technical Elective",
       "reqs": ["CS 2337", "SE 3354"]
     },
     "CS 4384": {
