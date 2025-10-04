@@ -22,19 +22,26 @@ json["Fast Track"] = filterComments(json["Fast Track"] ?? {});
 
 /** The requirements for the FAST TRACK course, exported because they are modified */
 const fastTrackBenchmarks = json["Fast Track"]["FAST TRACK"]?.reqs?.slice();
+// Fast Track
 {
-  // Fast Track
+  const replacementCourseIds = new Map<string, string>(); // Maps from course to the course that it is being replaced by
+
   for (const [id, v] of Object.entries(json["Fast Track"] ?? {})) {
     json.courses[id] = v; // merge in the fast track course
     if (!v.replaces) continue;
-    const replaced = json.courses[v.replaces];
-    if (!replaced) throw new Error(`FAST TRACK course ${v.replaces} not found`);
-    v.reqs = [...new Set([...(v.reqs ?? []), ...(replaced.reqs ?? [])])]; // Combine and deduplicate requirements
-    for (const course of Object.values(json.courses)) {
-      // Replace all instances of the course that is being replaced with the new course
-      course.reqs = course.reqs?.map(req => (req == v.replaces ? id : req));
-    }
+    const old = json.courses[v.replaces];
+    if (!old) throw new Error(`FAST TRACK course ${v.replaces} not found`);
+    v.name += ` (${v.replaces})`; // Add the name of the course that is being replaced
+    v.reqs = [...new Set([...(v.reqs ?? []), ...(old.reqs ?? [])])]; // Combine and deduplicate requirements
+    replacementCourseIds.set(v.replaces, id);
     delete json.courses[v.replaces];
+  }
+  // Delay this in case one of the replacements depends on another.
+  for (const [id, replacement] of replacementCourseIds) {
+    // Replace all instances of id with the replacement
+    for (const course of Object.values(json.courses)) {
+      course.reqs = course.reqs?.map(r => (r == id ? replacement : r));
+    }
   }
   delete json["Fast Track"];
 }
