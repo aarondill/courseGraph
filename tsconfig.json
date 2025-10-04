@@ -3,6 +3,7 @@
   "compilerOptions": {
     "lib": ["esnext"],
     "target": "ES2024",
+    "verbatimModuleSyntax": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
