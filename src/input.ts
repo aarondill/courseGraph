@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { objectEntries } from "tsafe/objectEntries";
 
 export type CourseCode = `${string} ${string}`;
-export type Semester = `${string} ${number}` | "transfer"; // "Fall 2025"
+export type Semester = `${number} ${string}` | "Transfer"; // "2025 Fall"
 
 export type Course = {
   /** The course code */
@@ -19,12 +19,13 @@ export type Course = {
 
 type CourseInput = { name: string; reqs?: CourseCode[] };
 type CourseInputFT = CourseInput & { replaces: CourseCode | null };
+type SemesterCourseMapInput = Record<Semester, CourseCode[]>;
 type JSONInput = {
   /** Degree name */
   degree: string;
   courses: Record<CourseCode, CourseInput>;
-  taken: Record<Semester, CourseCode[]>;
-  future: Record<Semester, CourseCode[]>;
+  taken: SemesterCourseMapInput;
+  future: SemesterCourseMapInput;
   /** FAST TRACK course */
   "Fast Track"?: Record<CourseCode, CourseInputFT>;
 };
@@ -44,20 +45,55 @@ const json = ((contents: string): Required<JSONInput> => {
   return { degree, courses, taken, future, "Fast Track": fastTrack };
 })(await fs.readFile("./courses.json", "utf8"));
 
+type SemesterCourseMap = Map<Semester, Set<CourseCode>>;
 export type Plan = {
-  taken: Map<Semester, Set<CourseCode>>;
-  future: Map<Semester, Set<CourseCode>>;
+  /**
+   * The taken courses for each semester
+   * The Map will be correctly ordered by semesters in temporal order
+   * Each set of courses will be sorted lexicographically
+   */
+  taken: SemesterCourseMap;
+  /**
+   * The courses planned for the future for each semester
+   * The Map will be correctly ordered by semesters in temporal order
+   * Each set of courses will be sorted lexicographically
+   */
+  future: SemesterCourseMap;
+  /**
+   * A map from taken courses to the semester they are taken in
+   * This is a fast lookup for the semester of a course, or whether it has been taken
+   */
   courseToSemester: Map<CourseCode, Semester>;
 };
+const SEMESTER_ORDER = ["Spring", "Summer", "Fall"];
+const compareSemester = (a: Semester, b: Semester): number => {
+  if (a == b) return 0;
+  if (a == "Transfer" || b == "Transfer") return a == "Transfer" ? -1 : 1;
+  const [ayear, asem] = a.split(" "),
+    [byear, bsem] = b.split(" ");
+  if (!asem || !ayear || !bsem || !byear)
+    throw new Error(`Invalid semester ${a} or ${b}`);
+  if (ayear != byear) return +ayear - +byear;
+  const asemi = SEMESTER_ORDER.indexOf(asem),
+    bsemi = SEMESTER_ORDER.indexOf(bsem);
+  if (asemi == -1 || bsemi == -1)
+    throw new Error(`Invalid semester ${a} or ${b}`);
+  return asemi - bsemi;
+};
+/** The plan for the degree from the input file */
 const plan: Plan = {
-  taken: objectEntries(json.taken).reduce(
-    (acc, [semester, courses]) => acc.set(semester, new Set(courses)),
-    new Map<Semester, Set<CourseCode>>()
-  ),
-  future: objectEntries(json.future).reduce(
-    (acc, [semester, courses]) => acc.set(semester, new Set(courses)),
-    new Map<Semester, Set<CourseCode>>()
-  ),
+  taken: objectEntries(json.taken)
+    .sort(([a], [b]) => compareSemester(a, b))
+    .reduce(
+      (acc, [semester, courses]) => acc.set(semester, new Set(courses.sort())),
+      new Map<Semester, Set<CourseCode>>()
+    ),
+  future: objectEntries(json.future)
+    .sort(([a], [b]) => compareSemester(a, b))
+    .reduce(
+      (acc, [semester, courses]) => acc.set(semester, new Set(courses.sort())),
+      new Map<Semester, Set<CourseCode>>()
+    ),
   courseToSemester: objectEntries(json.taken).reduce(
     (acc, [semester, courses]) => {
       courses.forEach(course => acc.set(course, semester));
@@ -66,6 +102,10 @@ const plan: Plan = {
     new Map<CourseCode, Semester>()
   ),
 };
+
+/**
+ * The name of the degree from the input file
+ */
 const degreeName = json.degree;
 
 // A copy of the exact requirements for the FAST TRACK course (no deduplication)
@@ -89,6 +129,12 @@ const makeCourse = ([id, course]: [
   };
 };
 
+/**
+ * The list of all courses listed in the input file
+ * This is a map from the course code to the course
+ * Fast track replacement courses are merged in here
+ * This list has an undefined order
+ */
 const courses = objectEntries(json.courses)
   .map(makeCourse)
   .reduce(
