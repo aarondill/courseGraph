@@ -27,8 +27,9 @@ const nodes = courses
       : allPrereqsMet
         ? "yellow"
         : "";
+    const replacementFor = c.replacementFor ? ` (${c.replacementFor})` : "";
     const ret =
-      esc`"${c.id}" [ label = "\\N${semester}\\n${c.name}"` +
+      esc`"${c.id}" [ label = "\\N${replacementFor}${semester}\\n${c.name}"` +
       (color ? esc`, fillcolor = "${color}"` : "") +
       (outlineColor ? esc`, color = "${outlineColor}", penwidth = 7` : "") +
       `];`;
