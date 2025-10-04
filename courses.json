@@ -142,10 +142,10 @@
       "reqs": ["FAST TRACK", "SE 3345", "CS 4384"],
       "replaces": "CS 4337"
     },
-    "SE 6388": {
-      "name": "Software Project Management",
-      "reqs": ["FAST TRACK", "SE 3354"],
-      "replaces": "SE 4381"
+    "CS 5349": {
+      "name": "Automata Theory",
+      "reqs": ["FAST TRACK", "CS 2305"],
+      "replaces": "CS 4384"
     }
   },
   "taken": {
@@ -187,7 +187,8 @@
       "MATH 4332",
       "FAST TRACK"
     ],
-    "2027 Fall": ["SE 6362", "SE 6388", "SE 6329", "CS 4384", "SE 4351"],
-    "2028 Spring": ["CS 6360", "CS 4397", "CS 6371", "SE 3341", "SE 4485"]
+    "2027 Summer": ["SE 4381"],
+    "2027 Fall": ["SE 6362", "SE 6329", "CS 5349", "SE 4351", "CS 4397"],
+    "2028 Spring": ["CS 6360", "CS 6371", "SE 3341", "SE 4485"]
   }
 }
