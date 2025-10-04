@@ -14,5 +14,8 @@
   "devDependencies": {
     "@types/node": "^24.5.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "tsafe": "^1.8.12"
   }
 }
