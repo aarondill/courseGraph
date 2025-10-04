@@ -56,14 +56,15 @@ const root =
 
 const output = `strict digraph graph_name {
   graph [
-    label = "Degree Plan",
+    label = "Degree Plan\\n\\n",
     labelloc = "t",
     labeljust = "c",
     rankdir = TB,
     splines = spline,
-    ranksep = 2.5,
+    ranksep = 1.5,
     nodesep = 0
     fontsize = 30
+    margin="0.5,0.75";
     size = "11,8.5"
     ratio = "compress"
   ];
