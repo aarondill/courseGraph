@@ -45,64 +45,6 @@ const json = ((contents: string): Required<JSONInput> => {
   return { degree, courses, taken, future, "Fast Track": fastTrack };
 })(await fs.readFile("./courses.json", "utf8"));
 
-type SemesterCourseMap = Map<Semester, Set<CourseCode>>;
-export type Plan = {
-  /**
-   * The taken courses for each semester
-   * The Map will be correctly ordered by semesters in temporal order
-   * Each set of courses will be sorted lexicographically
-   */
-  taken: SemesterCourseMap;
-  /**
-   * The courses planned for the future for each semester
-   * The Map will be correctly ordered by semesters in temporal order
-   * Each set of courses will be sorted lexicographically
-   */
-  future: SemesterCourseMap;
-  /**
-   * A map from taken courses to the semester they are taken in
-   * This is a fast lookup for the semester of a course, or whether it has been taken
-   */
-  courseToSemester: Map<CourseCode, Semester>;
-};
-const SEMESTER_ORDER = ["Spring", "Summer", "Fall"];
-const compareSemester = (a: Semester, b: Semester): number => {
-  if (a == b) return 0;
-  if (a == "Transfer" || b == "Transfer") return a == "Transfer" ? -1 : 1;
-  const [ayear, asem] = a.split(" "),
-    [byear, bsem] = b.split(" ");
-  if (!asem || !ayear || !bsem || !byear)
-    throw new Error(`Invalid semester ${a} or ${b}`);
-  if (ayear != byear) return +ayear - +byear;
-  const asemi = SEMESTER_ORDER.indexOf(asem),
-    bsemi = SEMESTER_ORDER.indexOf(bsem);
-  if (asemi == -1 || bsemi == -1)
-    throw new Error(`Invalid semester ${a} or ${b}`);
-  return asemi - bsemi;
-};
-/** The plan for the degree from the input file */
-const plan: Plan = {
-  taken: objectEntries(json.taken)
-    .sort(([a], [b]) => compareSemester(a, b))
-    .reduce(
-      (acc, [semester, courses]) => acc.set(semester, new Set(courses.sort())),
-      new Map<Semester, Set<CourseCode>>()
-    ),
-  future: objectEntries(json.future)
-    .sort(([a], [b]) => compareSemester(a, b))
-    .reduce(
-      (acc, [semester, courses]) => acc.set(semester, new Set(courses.sort())),
-      new Map<Semester, Set<CourseCode>>()
-    ),
-  courseToSemester: objectEntries(json.taken).reduce(
-    (acc, [semester, courses]) => {
-      courses.forEach(course => acc.set(course, semester));
-      return acc;
-    },
-    new Map<CourseCode, Semester>()
-  ),
-};
-
 /**
  * The name of the degree from the input file
  */
@@ -193,27 +135,92 @@ courses.forEach(course => {
   course.reqs = recursiveDeps.difference(allSubReqs);
 });
 
-// Warn about missing courses
-{
-  const plannedCourses = [plan.taken, plan.future]
-    .values()
-    .flatMap(i => i.values())
-    .flatMap(s => s)
-    .reduce((acc, c) => acc.add(c), new Set<CourseCode>());
+type SemesterCourseMap = Map<Semester, Set<CourseCode>>;
+const SEMESTER_ORDER = ["Spring", "Summer", "Fall"];
+const compareSemester = (a: Semester, b: Semester): number => {
+  if (a == b) return 0;
+  if (a == "Transfer" || b == "Transfer") return a == "Transfer" ? -1 : 1;
+  const [ayear, asem] = a.split(" "),
+    [byear, bsem] = b.split(" ");
+  if (!asem || !ayear || !bsem || !byear)
+    throw new Error(`Invalid semester ${a} or ${b}`);
+  if (ayear != byear) return +ayear - +byear;
+  const asemi = SEMESTER_ORDER.indexOf(asem),
+    bsemi = SEMESTER_ORDER.indexOf(bsem);
+  if (asemi == -1 || bsemi == -1)
+    throw new Error(`Invalid semester ${a} or ${b}`);
+  return asemi - bsemi;
+};
+const taken = objectEntries(json.taken)
+    .sort(([a], [b]) => compareSemester(a, b))
+    .reduce(
+      (acc, [semester, courses]) => acc.set(semester, new Set(courses.sort())),
+      new Map<Semester, Set<CourseCode>>()
+    ),
+  future = objectEntries(json.future)
+    .sort(([a], [b]) => compareSemester(a, b))
+    .reduce(
+      (acc, [semester, courses]) => acc.set(semester, new Set(courses.sort())),
+      new Map<Semester, Set<CourseCode>>()
+    );
 
-  const all = new Set(courses.values().map(c => c.id));
-  const missing = all.difference(plannedCourses);
-  if (missing.size > 0) {
-    console.warn(`The following courses are in the catalog, but not planned:`);
-    for (const c of missing) console.warn(`  ${c} - ${courses.get(c)?.name}`);
-    console.warn(``);
-  }
-  const extra = plannedCourses.difference(all);
-  if (extra.size > 0) {
-    console.warn(`The following courses are planned, but not in the catalog:`);
-    for (const c of extra) console.warn(`  ${c}`);
-    console.warn(``);
-  }
+// Warn about missing courses
+const plannedCourses = [taken, future]
+  .values()
+  .flatMap(i => i.values())
+  .flatMap(s => s)
+  .reduce((acc, c) => acc.add(c), new Set<CourseCode>());
+
+const all = new Set(courses.values().map(c => c.id));
+
+const missing = all.difference(plannedCourses);
+if (missing.size > 0) {
+  console.warn(`The following courses are in the catalog, but not planned:`);
+  for (const c of missing) console.warn(`  ${c} - ${courses.get(c)?.name}`);
+  console.warn(``);
 }
+const extra = plannedCourses.difference(all);
+if (extra.size > 0) {
+  console.warn(`The following courses are planned, but not in the catalog:`);
+  for (const c of extra) console.warn(`  ${c}`);
+  console.warn(``);
+}
+
+export type Plan = {
+  /**
+   * The taken courses for each semester
+   * The Map will be correctly ordered by semesters in temporal order
+   * Each set of courses will be sorted lexicographically
+   */
+  taken: SemesterCourseMap;
+  /**
+   * The courses planned for the future for each semester
+   * The Map will be correctly ordered by semesters in temporal order
+   * Each set of courses will be sorted lexicographically
+   */
+  future: SemesterCourseMap;
+  /**
+   * The courses that are in the catalog of required courses, but not planned
+   */
+  missing: Set<CourseCode>;
+  /**
+   * A map from taken courses to the semester they are taken in
+   * This is a fast lookup for the semester of a course, or whether it has been taken
+   */
+  courseToSemester: Map<CourseCode, Semester>;
+};
+/** The plan for the degree from the input file */
+const plan: Plan = {
+  taken,
+  future,
+  missing,
+  courseToSemester: objectEntries(json.taken).reduce(
+    (acc, [semester, courses]) => {
+      courses.forEach(course => acc.set(course, semester));
+      return acc;
+    },
+    new Map<CourseCode, Semester>()
+  ),
+};
 
 export { courses, degreeName, plan };
