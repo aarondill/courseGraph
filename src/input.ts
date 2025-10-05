@@ -193,4 +193,27 @@ courses.forEach(course => {
   course.reqs = recursiveDeps.difference(allSubReqs);
 });
 
+// Warn about missing courses
+{
+  const plannedCourses = [plan.taken, plan.future]
+    .values()
+    .flatMap(i => i.values())
+    .flatMap(s => s)
+    .reduce((acc, c) => acc.add(c), new Set<CourseCode>());
+
+  const all = new Set(courses.values().map(c => c.id));
+  const missing = all.difference(plannedCourses);
+  if (missing.size > 0) {
+    console.warn(`The following courses are in the catalog, but not planned:`);
+    for (const c of missing) console.warn(`  ${c} - ${courses.get(c)?.name}`);
+    console.warn(``);
+  }
+  const extra = plannedCourses.difference(all);
+  if (extra.size > 0) {
+    console.warn(`The following courses are planned, but not in the catalog:`);
+    for (const c of extra) console.warn(`  ${c}`);
+    console.warn(``);
+  }
+}
+
 export { courses, degreeName, plan };
