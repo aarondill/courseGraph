@@ -149,7 +149,8 @@ const courses = objectEntries(json.courses)
     if (c.replacementFor) {
       replacementCourses.add(c);
       const old = courses.get(c.replacementFor);
-      if (!old) throw new Error(`course ${c.replacementFor} not found`);
+      if (!old)
+        throw new Error(`replaced course ${c.replacementFor} not found`);
       c.reqs = c.reqs.union(old.reqs); // Combine and deduplicate requirements
       courses.delete(c.replacementFor);
     }
@@ -173,7 +174,7 @@ const allDeps = new Map<CourseCode, Set<CourseCode>>();
 function resolve(course: CourseCode): Set<CourseCode> {
   if (allDeps.has(course)) return allDeps.get(course)!;
   const courseInfo = courses.get(course);
-  if (!courseInfo) throw new Error(`Course ${course} not found`);
+  if (!courseInfo) throw new Error(`Prerequisite course ${course} not found`);
   const subreqs = courseInfo.reqs
     .values()
     .map(resolve)
