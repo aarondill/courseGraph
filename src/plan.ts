@@ -1,6 +1,6 @@
 import packageJson from "../package.json" with { type: "json" };
-import type { CourseCode, Semester } from "./input.ts";
-import { courses, degreeName, plan } from "./input.ts";
+import type { CourseCode, Semester } from "./input/index.ts";
+import { courses, degreeName, plan } from "./input/index.ts";
 
 const takenCourses = new Set<string>();
 

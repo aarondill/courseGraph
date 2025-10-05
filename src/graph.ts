@@ -1,7 +1,7 @@
 import cp from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { courses, degreeName, plan } from "./input.ts";
+import { courses, degreeName, plan } from "./input/index.ts";
 
 function esc(strings: TemplateStringsArray | string, ...values: any[]) {
   if (typeof strings === "string") return strings.replaceAll('"', '\\"');
