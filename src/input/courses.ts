@@ -68,21 +68,22 @@ const courses = objectEntries(json.courses)
 }
 
 const get = getAsserter(courses);
-const deps = (c: Course) => {
-  const reqs = c.reqs.values().map(get);
-  return [...reqs, ...c.coreqs.values().map(get)];
-  // .flatMap(c => [c, ...c.coreqs.values().map(get)]); // Dependancies are requisites and corequisites of subclasses (not our own coreqs!)
+const deps = function* (cc: CourseCode) {
+  // Uses a generator function to avoid having to create an array with values()
+  const c = get(cc);
+  yield* c.reqs;
+  yield* c.coreqs;
 };
 courses.forEach(course => {
-  const allSubReqs = deps(course)
+  const allSubReqs = deps(course.id)
     .map(r => recursiveDependencies(r, deps))
-    .reduce((acc, set) => acc.union(set), new Set<Course>());
+    .reduce((acc, set) => acc.union(set), new Set<CourseCode>());
 
   // Remove any prerequisites that are also in the recursive dependencies (We already need them anyways)
-  course.reqs = recursiveDependencies(course, deps)
+  course.reqs = recursiveDependencies(course.id, deps)
     .difference(allSubReqs)
+    .difference(course.coreqs) // Remove corequisites from prerequisites
     .values()
-    .map(c => c.id)
     .reduce((acc, c) => acc.add(c), new Set<CourseCode>());
 });
 export default courses;
