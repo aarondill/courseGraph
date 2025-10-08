@@ -8,8 +8,12 @@
     "CS 1436": { "name": "Programming Fundamentals" },
     "MATH 2414": { "name": "Integral Calculus", "reqs": ["MATH 2413"] },
     "CS 1337": { "name": "Computer Science I", "reqs": ["CS 1436"] },
-    "PHYS 2325": { "name": "Mechanics", "reqs": ["MATH 2413"] },
-    "PHYS 2125": { "name": "Physics Laboratory I", "reqs": ["PHYS 2325"] },
+    "PHYS 2325": {
+      "name": "Mechanics",
+      "reqs": ["MATH 2413"],
+      "coreqs": ["MATH 2414"]
+    },
+    "PHYS 2125": { "name": "Physics Laboratory I", "coreqs": ["PHYS 2325"] },
     "CS 2305": {
       "name": "Discrete Mathematics for Computing I",
       "reqs": ["MATH 2413"]
@@ -27,7 +31,7 @@
       "name": "Electromagnetism and Waves",
       "reqs": ["PHYS 2325", "MATH 2414"]
     },
-    "PHYS 2126": { "name": "Physics Laboratory II", "reqs": ["PHYS 2326"] },
+    "PHYS 2126": { "name": "Physics Laboratory II", "coreqs": ["PHYS 2326"] },
     "MATH 2418": { "name": "Linear Algebra", "reqs": ["MATH 2413"] },
     "SE 3306": { "name": "Mathematics Foundations of SE", "reqs": ["CS 2305"] },
     "SE 3341": {
