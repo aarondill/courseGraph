@@ -68,11 +68,11 @@ const courses = objectEntries(json.courses)
 }
 
 const get = getAsserter(courses);
-const deps = (c: Course) =>
-  c.reqs
-    .values()
-    .map(get)
-    .flatMap(c => [c, ...c.coreqs.values().map(get)]); // Dependancies are requisites and corequisites of subclasses (not our own coreqs!)
+const deps = (c: Course) => {
+  const reqs = c.reqs.values().map(get);
+  return [...reqs, ...c.coreqs.values().map(get)];
+  // .flatMap(c => [c, ...c.coreqs.values().map(get)]); // Dependancies are requisites and corequisites of subclasses (not our own coreqs!)
+};
 courses.forEach(course => {
   const allSubReqs = deps(course)
     .map(r => recursiveDependencies(r, deps))
