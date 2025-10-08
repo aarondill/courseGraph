@@ -1,7 +1,11 @@
 import fs from "node:fs/promises";
 import type { CourseCode, Semester } from "./types.ts";
 
-export type CourseInput = { name: string; reqs?: CourseCode[] };
+export type CourseInput = {
+  name: string;
+  reqs?: CourseCode[];
+  coreqs?: CourseCode[];
+};
 export type CourseInputFT = CourseInput & { replaces: CourseCode | null };
 export type SemesterCourseMapInput = Record<Semester, CourseCode[]>;
 export type JSONInput = {

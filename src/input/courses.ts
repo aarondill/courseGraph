@@ -1,9 +1,8 @@
-import { assert } from "tsafe/assert";
 import { objectEntries } from "tsafe/objectEntries";
 import type { CourseInput, CourseInputFT } from "./json.ts";
 import json from "./json.ts";
 import type { Course, CourseCode } from "./types.ts";
-import { recursiveDependencies } from "./util.ts";
+import { getAsserter, recursiveDependencies } from "./util.ts";
 
 // A copy of the exact requirements for the FAST TRACK course (no deduplication)
 const fastTrackBenchmarks = new Set(json["Fast Track"]["FAST TRACK"]?.reqs).add(
@@ -14,13 +13,14 @@ const makeCourse = ([id, course]: [
   CourseCode,
   CourseInput | CourseInputFT,
 ]): Course => {
-  const { name, reqs } = course;
+  const { name, reqs, coreqs } = course;
   const replacementFor = ("replaces" in course && course.replaces) || undefined;
   const isFastTrackBenchmark = fastTrackBenchmarks.has(id);
   return {
     id,
     name,
     reqs: new Set(reqs ?? []),
+    coreqs: new Set(coreqs ?? []),
     replacementFor,
     isFastTrackBenchmark,
   };
@@ -48,7 +48,9 @@ const courses = objectEntries(json.courses)
       const old = courses.get(c.replacementFor);
       if (!old)
         throw new Error(`replaced course ${c.replacementFor} not found`);
+      // TODO: Is this actually needed? are the requisites just the replacement?
       c.reqs = c.reqs.union(old.reqs); // Combine and deduplicate requirements
+      c.coreqs = c.coreqs.union(old.coreqs);
       courses.delete(c.replacementFor);
     }
     courses.set(c.id, c); // merge in the fast track course
@@ -60,15 +62,17 @@ const courses = objectEntries(json.courses)
       if (!c.replacementFor)
         throw new Error("No replacementfor found! This is a bug");
       if (course.reqs.delete(c.replacementFor)) course.reqs.add(c.id);
+      if (course.coreqs.delete(c.replacementFor)) course.coreqs.add(c.id);
     }
   }
 }
 
+const get = getAsserter(courses);
 const deps = (c: Course) =>
-  c.reqs.values().map(id => {
-    assert(courses.has(id), `Prerequisite course not found: ${id}`);
-    return courses.get(id)!;
-  });
+  c.reqs
+    .values()
+    .map(get)
+    .flatMap(c => [c, ...c.coreqs.values().map(get)]); // Dependancies are requisites and corequisites of subclasses (not our own coreqs!)
 courses.forEach(course => {
   const allSubReqs = deps(course)
     .map(r => recursiveDependencies(r, deps))

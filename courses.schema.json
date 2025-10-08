@@ -25,6 +25,14 @@
           "items": {
             "$ref": "#/definitions/CourseCode"
           }
+        },
+        "coreqs": {
+          "type": "array",
+          "description": "Course co-requirements",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/CourseCode"
+          }
         }
       }
     },

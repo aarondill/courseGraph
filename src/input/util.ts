@@ -1,3 +1,4 @@
+import { assert } from "tsafe/assert";
 import type { Semester } from "./types.ts";
 
 const SEMESTER_ORDER = ["Spring", "Summer", "Fall"];
@@ -38,4 +39,12 @@ export function recursiveDependencies<T>(
   dependancies: (t: T) => Iterable<T>
 ): Set<T> {
   return recursiveDependenciesImpl(val, dependancies, new Map<T, Set<T>>());
+}
+
+// Suggested usage: const get = getAsserter(map); get(id);
+export function getAsserter<K, V>(map: Map<K, V>): (id: K) => V {
+  return (id: K) => {
+    assert(map.has(id), `Key not found: ${id}`);
+    return map.get(id)!;
+  };
 }

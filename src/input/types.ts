@@ -8,6 +8,8 @@ export type Course = {
   name: string;
   /** The prerequisites for this course */
   reqs: Set<CourseCode>;
+  /** The corequisites for this course. These may be taken during the same semester as this course */
+  coreqs: Set<CourseCode>;
   /** If this is a replacement for another course, the name of the course that it is replacing */
   replacementFor?: CourseCode;
   /** If this is a benchmark for the FAST TRACK course, also includes the FAST TRACK course itself */
