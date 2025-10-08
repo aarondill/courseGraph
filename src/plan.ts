@@ -83,13 +83,20 @@ const output = [
   `_Generated using [CourseGraph](${packageJson.repository})_`,
   "", // Empty line
   printPlan(plan.taken, false), // Don't warn about prereqs for already taken courses
-  `\n----------\n`, // Separate taken from future
-  printPlan(plan.future),
-  `\n----------\n`, // Separate plan from missing
-  `## Missing courses from plan`,
-  ...plan.missing
-    .values()
-    .map(c => formatCourse(c))
-    .map(s => indent("- " + s)),
-].join("\n");
-console.log(output);
+];
+if (plan.future.size > 0) {
+  output.push(
+    `\n----------\n`, // Separate taken from future
+    printPlan(plan.future)
+  );
+}
+if (plan.missing.size > 0)
+  output.push(
+    `\n----------\n`, // Separate plan from missing
+    `## Missing courses from plan`,
+    ...plan.missing
+      .values()
+      .map(c => formatCourse(c))
+      .map(s => indent("- " + s))
+  );
+console.log(output.join("\n"));
