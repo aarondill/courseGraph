@@ -95,8 +95,17 @@ if (ext == "gv") {
   await fs.writeFile(outputFile, output);
 } else {
   // Otherwise, run dot with the output as it's stdin to create the desired output format
-  cp.spawnSync("dot", [`-T${ext}`, "-o", outputFile], {
+  const ret = cp.spawnSync("dot", [`-T${ext}`, "-o", outputFile], {
     input: output,
     stdio: ["pipe", "inherit", "inherit"],
   });
+  if (ret.error) {
+    if ("code" in ret.error && ret.error.code === "ENOENT") {
+      throw new Error(
+        `Could not find 'dot' executable. Is Graphviz installed?`
+      );
+    } else throw ret.error;
+  } else if (ret.status !== 0) {
+    throw new Error(`dot exited with status ${ret.status}`);
+  }
 }
