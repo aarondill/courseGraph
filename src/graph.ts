@@ -52,7 +52,7 @@ const noPrereqs = courses
   .toArray();
 const root =
   esc`degree [ label = "${degreeName}", fillcolor = "orangered" ];` +
-  `degree -> {"${noPrereqs.map(esc).join('", "')}"};`;
+  `degree -> { rank=same; "${noPrereqs.map(esc).join('", "')}"};`;
 
 const output = `strict digraph graph_name {
   graph [
