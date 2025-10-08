@@ -16,7 +16,7 @@ const indent = (str: string, depth = 1, indent = "  ") =>
  * Format a course code for printing
  * NOTE: Assumes takenCourses is updated from outside
  */
-function formatCourse(id: CourseCode) {
+function formatCourse(id: CourseCode, warnPrereqs = true) {
   let output = `${id}:`;
 
   const course = courses.get(id);
@@ -29,21 +29,24 @@ function formatCourse(id: CourseCode) {
       output += " *<u>(Fast Track Benchmark)</u>*";
     }
 
-    const missingreqs = course.reqs.difference(takenCourses);
-    if (missingreqs.size > 0) {
-      // The user needs to re-order their courses to avoid this
-      const warning = `⚠️WARNING⚠️: missing prereqs: ${[...missingreqs].join(", ")}`;
-      output += ` (${warning})`;
-      console.error(`${id}: ${warning}`);
-    }
-    const missingco = course.coreqs
-      .difference(takenCourses)
-      .difference(coursesCurrentSemester); // missing = coreqs - taken - current
-    if (missingco.size > 0) {
-      // The user needs to re-order their courses to avoid this
-      const warning = `⚠️WARNING⚠️: missing coreqs: ${[...missingco].join(", ")}`;
-      output += ` (${warning})`;
-      console.error(`${id}: ${warning}`);
+    // Allow opting out of prereq warnings (for taken courses)
+    if (warnPrereqs) {
+      const missingreqs = course.reqs.difference(takenCourses);
+      if (missingreqs.size > 0) {
+        // The user needs to re-order their courses to avoid this
+        const warning = `⚠️WARNING⚠️: missing prereqs: ${[...missingreqs].join(", ")}`;
+        output += ` (${warning})`;
+        console.error(`${id}: ${warning}`);
+      }
+      const missingco = course.coreqs
+        .difference(takenCourses)
+        .difference(coursesCurrentSemester); // missing = coreqs - taken - current
+      if (missingco.size > 0) {
+        // The user needs to re-order their courses to avoid this
+        const warning = `⚠️WARNING⚠️: missing coreqs: ${[...missingco].join(", ")}`;
+        output += ` (${warning})`;
+        console.error(`${id}: ${warning}`);
+      }
     }
   } else {
     output += ` <u>🚨MISSING from catalog!🚨</u>`;
@@ -51,7 +54,10 @@ function formatCourse(id: CourseCode) {
 
   return output;
 }
-function printPlan(all: Map<Semester, Set<CourseCode>>): string {
+function printPlan(
+  all: Map<Semester, Set<CourseCode>>,
+  warnPrereqs = true
+): string {
   const lines: string[] = []; // lines of output
   for (const [semester, totake] of all.entries()) {
     // Add all course in this semester to the taken list (in case of
@@ -62,7 +68,7 @@ function printPlan(all: Map<Semester, Set<CourseCode>>): string {
     for (const c of totake) coursesCurrentSemester.add(c);
     totake
       .values()
-      .map(formatCourse)
+      .map(c => formatCourse(c, warnPrereqs))
       .map(s => indent("- " + s)) // Add a bullet
       .forEach(s => lines.push(s));
     for (const c of coursesCurrentSemester) takenCourses.add(c); // we've taken them all after the semester
@@ -76,14 +82,14 @@ const output = [
   `# ${degreeName}`,
   `_Generated using [CourseGraph](${packageJson.repository})_`,
   "", // Empty line
-  printPlan(plan.taken),
+  printPlan(plan.taken, false), // Don't warn about prereqs for already taken courses
   `\n----------\n`, // Separate taken from future
   printPlan(plan.future),
   `\n----------\n`, // Separate plan from missing
   `## Missing courses from plan`,
   ...plan.missing
     .values()
-    .map(formatCourse)
+    .map(c => formatCourse(c))
     .map(s => indent("- " + s)),
 ].join("\n");
 console.log(output);
