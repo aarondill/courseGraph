@@ -70,7 +70,8 @@ function printPlan(all: Map<Semester, Set<CourseCode>>): string {
   }
   return lines.join("\n");
 }
-
+// Transfer semester is special, we need to add it to the taken list before processing
+plan.taken.get("Transfer")?.forEach(c => takenCourses.add(c));
 const output = [
   `# ${degreeName}`,
   `_Generated using [CourseGraph](${packageJson.repository})_`,
