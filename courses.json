@@ -113,10 +113,10 @@
   },
 
   "Fast Track": {
-    "// coreqs": "one of SE 4348,SE 4351, or SE 4352 -- These are corequisites since it can be applied for while they're being taken.",
+    "// reqs": "one of SE 4348,SE 4351, or SE 4352",
     "FAST TRACK": {
       "name": "Fast Track Program Benchmark Courses",
-      "coreqs": [
+      "reqs": [
         "SE 2340",
         "SE 3306",
         "SE 3345",

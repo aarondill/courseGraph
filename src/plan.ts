@@ -32,6 +32,10 @@ function formatCourse(id: CourseCode, warnPrereqs = true) {
     // Allow opting out of prereq warnings (for taken courses)
     if (warnPrereqs) {
       const missingreqs = course.reqs.difference(takenCourses);
+      if (id == "FAST TRACK") {
+        // Fast Track is special, since it's not a real course. It's prereqs are really coreqs, but placing it that way in the graph messes up the whole graph.
+        for (const c of coursesCurrentSemester) missingreqs.delete(c);
+      }
       if (missingreqs.size > 0) {
         // The user needs to re-order their courses to avoid this
         const warning = `⚠️WARNING⚠️: missing prereqs: ${[...missingreqs].join(", ")}`;
@@ -78,6 +82,7 @@ function printPlan(
 }
 // Transfer semester is special, we need to add it to the taken list before processing
 plan.taken.get("Transfer")?.forEach(c => takenCourses.add(c));
+
 const output = [
   `# ${degreeName}`,
   `_Generated using [CourseGraph](${packageJson.repository})_`,
