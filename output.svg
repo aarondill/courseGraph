@@ -488,11 +488,11 @@
 <text text-anchor="middle" x="1537.25" y="-1099.21" font-family="Times,serif" font-size="14.00">GOVT 2306</text>
 <text text-anchor="middle" x="1537.25" y="-1084.21" font-family="Times,serif" font-size="14.00">Core: 070</text>
 </g>
-<!-- HIST 1301 -->
+<!-- HIST 2384 -->
 <g id="node34" class="node">
-<title>HIST 1301</title>
+<title>HIST 2384</title>
 <ellipse fill="yellow" stroke="black" cx="1653.25" cy="-1095.41" rx="55.72" ry="22.76"/>
-<text text-anchor="middle" x="1653.25" y="-1099.21" font-family="Times,serif" font-size="14.00">HIST 1301</text>
+<text text-anchor="middle" x="1653.25" y="-1099.21" font-family="Times,serif" font-size="14.00">HIST 2384</text>
 <text text-anchor="middle" x="1653.25" y="-1084.21" font-family="Times,serif" font-size="14.00">Core: 060</text>
 </g>
 <!-- HIST 1302 -->
@@ -643,9 +643,9 @@
 <path fill="none" stroke="black" d="M1588.48,-1225.93C1578.98,-1201.91 1561.51,-1157.75 1549.64,-1127.75"/>
 <polygon fill="black" stroke="black" points="1552.79,-1126.17 1545.85,-1118.16 1546.28,-1128.75 1552.79,-1126.17"/>
 </g>
-<!-- degree&#45;&gt;HIST 1301 -->
+<!-- degree&#45;&gt;HIST 2384 -->
 <g id="edge53" class="edge">
-<title>degree&#45;&gt;HIST 1301</title>
+<title>degree&#45;&gt;HIST 2384</title>
 <path fill="none" stroke="black" d="M1602.02,-1225.93C1611.52,-1201.91 1628.99,-1157.75 1640.86,-1127.75"/>
 <polygon fill="black" stroke="black" points="1644.22,-1128.75 1644.65,-1118.16 1637.71,-1126.17 1644.22,-1128.75"/>
 </g>
