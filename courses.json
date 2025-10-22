@@ -102,7 +102,7 @@
     "RHET 1302": { "name": "Core: 010" },
     "GOVT 2305": { "name": "Core: 070" },
     "GOVT 2306": { "name": "Core: 070" },
-    "HIST 1301": { "name": "Core: 060" },
+    "HIST 2384": { "name": "Core: 060" },
     "HIST 1302": { "name": "Core: 060" },
     "HIST 2322": { "name": "Core: 040" },
     "THEA 1310": { "name": "Core: 050" },
@@ -172,7 +172,7 @@
       "SE 3377",
       "GOVT 2306",
       "THEA 1310",
-      "HIST 1301"
+      "HIST 2384"
     ],
     "2026 Summer": ["PHYS 2325", "PHYS 2125", "HIST 1302", "ECS 2390"],
     "2026 Fall": [
