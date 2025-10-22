@@ -64,7 +64,7 @@ const root =
   esc`degree [ label = "${degreeName}", fillcolor = "orangered" ];` +
   `degree -> { rank=same; "${noPrereqs.map(esc).join('", "')}"};`;
 
-const output = `strict digraph graph_name {
+const output = `strict digraph {
   graph [
     label = "Degree Plan\\n\\n",
     labelloc = "t",
