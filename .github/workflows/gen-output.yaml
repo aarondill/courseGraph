@@ -33,7 +33,7 @@ jobs:
 
       - name: Commit output.svg
         uses: stefanzweifel/git-auto-commit-action@v4
-        // if push fails,it's likely cause it's out of date,don't error,but stop
+        # if push fails,it's likely cause it's out of date,don't error,but stop
         continue-on-error: true
         with:
           commit_message: "ci: Generate output.svg"
