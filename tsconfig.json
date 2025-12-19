@@ -10,7 +10,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "noUncheckedIndexedAccess": true,
-    "module": "esnext",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
