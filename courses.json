@@ -164,16 +164,10 @@
       "CS 1337",
       "MATH 2312"
     ],
-    "2025 Fall": ["ECS 1100", "CS 1200", "MATH 2414", "GOVT 2305", "CS 2337"]
+    "2025 Fall": ["ECS 1100", "CS 1200", "MATH 2414", "GOVT 2305", "CS 2337"],
+    "2026 Spring": ["CS 2305", "SE 3377", "GOVT 2306", "THEA 1310", "HIST 2384"]
   },
   "future": {
-    "2026 Spring": [
-      "CS 2305",
-      "SE 3377",
-      "GOVT 2306",
-      "THEA 1310",
-      "HIST 2384"
-    ],
     "2026 Summer": ["PHYS 2325", "PHYS 2125", "HIST 1302", "ECS 2390"],
     "2026 Fall": [
       "SE 2340",
