@@ -11,6 +11,9 @@ importers:
       tsafe:
         specifier: ^1.8.12
         version: 1.8.12
+      yaml:
+        specifier: ^2.8.2
+        version: 2.8.2
     devDependencies:
       '@types/node':
         specifier: ^24.5.2
@@ -35,6 +38,11 @@ packages:
   undici-types@7.12.0:
     resolution: {integrity: sha512-goOacqME2GYyOZZfb5Lgtu+1IDmAlAEu5xnD3+xTzS10hT0vzpf0SPjkXwAw9Jm+4n/mQGDP3LO8CPbYROeBfQ==}
 
+  yaml@2.8.2:
+    resolution: {integrity: sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==}
+    engines: {node: '>= 14.6'}
+    hasBin: true
+
 snapshots:
 
   '@types/node@24.5.2':
@@ -46,3 +54,5 @@ snapshots:
   typescript@5.9.2: {}
 
   undici-types@7.12.0: {}
+
+  yaml@2.8.2: {}
