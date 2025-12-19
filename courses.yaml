@@ -1,192 +1,197 @@
-{
-  "$schema": "./courses.schema.json",
-  "degree": "B.S. in Computer Science",
-  "courses": {
-    "ECS 1100": { "name": "Intro to Engineering and CS" },
-    "CS 1200": { "name": "Intro to CS and SE" },
-    "MATH 2413": { "name": "Differential Calculus", "reqs": ["MATH 2312"] },
-    "CS 1436": { "name": "Programming Fundamentals" },
-    "MATH 2414": { "name": "Integral Calculus", "reqs": ["MATH 2413"] },
-    "CS 1337": { "name": "Computer Science I", "reqs": ["CS 1436"] },
-    "PHYS 2325": {
-      "name": "Mechanics",
-      "reqs": ["MATH 2413"],
-      "coreqs": ["MATH 2414"]
-    },
-    "PHYS 2125": { "name": "Physics Laboratory I", "coreqs": ["PHYS 2325"] },
-    "CS 2305": {
-      "name": "Discrete Mathematics for Computing I",
-      "reqs": ["MATH 2413"]
-    },
-    "CS 2337": { "name": "Computer Science II", "reqs": ["CS 1337"] },
-    "SE 2340": {
-      "name": "Computer Architecture",
-      "reqs": ["CS 1337", "CS 2305"]
-    },
-    "MATH 4332": {
-      "name": "Math Elective",
-      "reqs": ["MATH 2414"]
-    },
-    "PHYS 2326": {
-      "name": "Electromagnetism and Waves",
-      "reqs": ["PHYS 2325", "MATH 2414"]
-    },
-    "PHYS 2126": { "name": "Physics Laboratory II", "coreqs": ["PHYS 2326"] },
-    "MATH 2418": { "name": "Linear Algebra", "reqs": ["MATH 2413"] },
-    "SE 3306": { "name": "Mathematics Foundations of SE", "reqs": ["CS 2305"] },
-    "SE 3341": {
-      "name": "Probability & Statistics in CS/SE",
-      "reqs": ["CS 2305", "MATH 2414", "MATH 2418"]
-    },
-    "SE 3345": {
-      "name": "Data Structures & Intro to Algorithmic Analysis",
-      "reqs": ["CS 2337", "CS 2305"]
-    },
-    "SE 3377": {
-      "name": "C/C++ Programming in a UNIX Envirn",
-      "reqs": ["CS 2337"]
-    },
-    "ECS 2390": {
-      "name": "Professional & Technical Communication",
-      "reqs": ["RHET 1302"]
-    },
-    "SE 3354": {
-      "name": "Software Engineering",
-      "reqs": ["CS 2305", "CS 2337", "ECS 2390"]
-    },
-    "SE 4348": {
-      "name": "Operating Systems Concepts",
-      "reqs": ["SE 2340", "SE 3345", "SE 3377"]
-    },
-    "SE 3162": {
-      "name": "Professional Responsibility in CS/SE",
-      "reqs": ["ECS 2390", "GOVT 2305"]
-    },
-    "SE 4347": { "name": "Database Systems", "reqs": ["SE 3345"] },
-    "SE 4381": {
-      "name": "Software Project Planning & Mgmt.",
-      "reqs": ["SE 3354"]
-    },
-    "SE 4352": {
-      "name": "Software Architecture & Design",
-      "reqs": ["SE 3306", "SE 3345"]
-    },
-    "SE 4351": {
-      "name": "Requirements Engineering",
-      "reqs": ["SE 3306", "SE 3345"]
-    },
-    "SE 4367": {
-      "name": "Software Testing, Verif, Valid, QA",
-      "reqs": ["SE 3306", "SE 3354"]
-    },
-    "SE 4485": {
-      "name": "Software Engineering Project",
-      "reqs": ["SE 4381", "SE 4352", "SE 4351", "SE 4367"]
-    },
-    "CS 4397": {
-      "name": "SE Technical Elective",
-      "reqs": ["SE 4348"]
-    },
-    "CS 4337": {
-      "name": "SE Technical Elective",
-      "reqs": ["SE 2340", "CS 2305", "CS 2337"]
-    },
-    "SE 4376": {
-      "name": "SE Technical Elective",
-      "reqs": ["CS 2337", "SE 3354"]
-    },
-    "CS 4384": {
-      "name": "SE Technical Elective",
-      "reqs": ["CS 2305"]
-    },
-    "RHET 1302": { "name": "Core: 010" },
-    "GOVT 2305": { "name": "Core: 070" },
-    "GOVT 2306": { "name": "Core: 070" },
-    "HIST 2384": { "name": "Core: 060" },
-    "HIST 1302": { "name": "Core: 060" },
-    "HIST 2322": { "name": "Core: 040" },
-    "THEA 1310": { "name": "Core: 050" },
-    "GEOG 2303": { "name": "Core: 080" },
-    "MATH 1316": { "name": "Free Elective" },
-    "RHET 1301": { "name": "Free Elective" },
-    "MATH 2312": { "name": "Precalculus" }
-  },
-
-  "Fast Track": {
-    # reqs: one of SE 4348,SE 4351, or SE 4352
-    "FAST TRACK": {
-      "name": "Fast Track Program Benchmark Courses",
-      "reqs": [
-        "SE 2340",
-        "SE 3306",
-        "SE 3345",
-        "SE 3354",
-        "SE 4367",
-        "SE 4348"
-      ],
-      "replaces": null
-    },
-    "SE 6329": {
-      "name": "Object Oriented Design",
-      "reqs": ["FAST TRACK", "SE 3354"],
-      "replaces": "SE 4376"
-    },
-    "CS 6360": {
-      "name": "Database Systems",
-      "reqs": ["FAST TRACK", "SE 3345"],
-      "replaces": "SE 4347"
-    },
-    "SE 6362": {
-      "name": "Architecture and Design *(Approval Needed)*",
-      "reqs": ["FAST TRACK", "SE 3354"],
-      "replaces": "SE 4352"
-    },
-    "CS 6371": {
-      "name": "Programming Languages *(Approval Needed)*",
-      "reqs": ["FAST TRACK", "SE 3345", "CS 4384"],
-      "replaces": "CS 4337"
-    },
-    "CS 5349": {
-      "name": "Automata Theory",
-      "reqs": ["FAST TRACK", "CS 2305"],
-      "replaces": "CS 4384"
-    }
-  },
-  "taken": {
-    "Transfer": [
-      "MATH 1316",
-      "RHET 1301",
-      "RHET 1302",
-      "GEOG 2303",
-      "HIST 2322",
-      "MATH 2413",
-      "CS 1436",
-      "CS 1337",
-      "MATH 2312"
-    ],
-    "2025 Fall": ["ECS 1100", "CS 1200", "MATH 2414", "GOVT 2305", "CS 2337"],
-    "2026 Spring": ["CS 2305", "SE 3377", "GOVT 2306", "THEA 1310", "HIST 2384"]
-  },
-  "future": {
-    "2026 Summer": ["PHYS 2325", "PHYS 2125", "HIST 1302", "ECS 2390"],
-    "2026 Fall": [
-      "SE 2340",
-      "SE 3345",
-      "SE 3306",
-      "SE 3354",
-      "PHYS 2326",
-      "PHYS 2126"
-    ],
-    "2027 Spring": [
-      "SE 4348",
-      "SE 4367",
-      "SE 3162",
-      "MATH 2418",
-      "MATH 4332",
-      "FAST TRACK"
-    ],
-    "2027 Summer": ["SE 4381"],
-    "2027 Fall": ["SE 6362", "SE 6329", "CS 5349", "SE 4351", "CS 4397"],
-    "2028 Spring": ["CS 6360", "CS 6371", "SE 3341", "SE 4485"]
-  }
-}
+# yaml-language-server: $schema=./courses.schema.json
+%YAML 1.2
+---
+degree: B.S. in Computer Science
+courses:
+  ECS 1100: Intro to Engineering and CS
+  CS 1200: Intro to CS and SE
+  MATH 2413:
+    name: Differential Calculus
+    reqs: [MATH 2312]
+  CS 1436: Programming Fundamentals
+  MATH 2414:
+    name: Integral Calculus
+    reqs: [MATH 2413]
+  CS 1337:
+    name: Computer Science I
+    reqs: [CS 1436]
+  PHYS 2325:
+    name: Mechanics
+    reqs: [MATH 2413]
+    coreqs: [MATH 2414]
+  PHYS 2125:
+    name: Physics Laboratory I
+    coreqs: [PHYS 2325]
+  CS 2305:
+    name: Discrete Mathematics for Computing I
+    reqs: [MATH 2413]
+  CS 2337:
+    name: Computer Science II
+    reqs: [CS 1337]
+  SE 2340:
+    name: Computer Architecture
+    reqs: [CS 1337, CS 2305]
+  MATH 4332:
+    name: Math Elective
+    reqs: [MATH 2414]
+  PHYS 2326:
+    name: Electromagnetism and Waves
+    reqs: [PHYS 2325, MATH 2414]
+  PHYS 2126:
+    name: Physics Laboratory II
+    coreqs: [PHYS 2326]
+  MATH 2418:
+    name: Linear Algebra
+    reqs: [MATH 2413]
+  SE 3306:
+    name: Mathematics Foundations of SE
+    reqs: [CS 2305]
+  SE 3341:
+    name: Probability & Statistics in CS/SE
+    reqs: [CS 2305, MATH 2414, MATH 2418]
+  SE 3345:
+    name: Data Structures & Intro to Algorithmic Analysis
+    reqs: [CS 2337, CS 2305]
+  SE 3377:
+    name: C/C++ Programming in a UNIX Envirn
+    reqs: [CS 2337]
+  ECS 2390:
+    name: Professional & Technical Communication
+    reqs: [RHET 1302]
+  SE 3354:
+    name: Software Engineering
+    reqs: [CS 2305, CS 2337, ECS 2390]
+  SE 4348:
+    name: Operating Systems Concepts
+    reqs: [SE 2340, SE 3345, SE 3377]
+  SE 3162:
+    name: Professional Responsibility in CS/SE
+    reqs: [ECS 2390, GOVT 2305]
+  SE 4347:
+    name: Database Systems
+    reqs: [SE 3345]
+  SE 4381:
+    name: Software Project Planning & Mgmt.
+    reqs: [SE 3354]
+  SE 4352:
+    name: Software Architecture & Design
+    reqs: [SE 3306, SE 3345]
+  SE 4351:
+    name: Requirements Engineering
+    reqs: [SE 3306, SE 3345]
+  SE 4367:
+    name: Software Testing, Verif, Valid, QA
+    reqs: [SE 3306, SE 3354]
+  SE 4485:
+    name: Software Engineering Project
+    reqs: [SE 4381, SE 4352, SE 4351, SE 4367]
+  CS 4397:
+    name: SE Technical Elective
+    reqs: [SE 4348]
+  CS 4337:
+    name: SE Technical Elective
+    reqs: [SE 2340, CS 2305, CS 2337]
+  SE 4376:
+    name: SE Technical Elective
+    reqs: [CS 2337, SE 3354]
+  CS 4384:
+    name: SE Technical Elective
+    reqs: [CS 2305]
+  RHET 1302: "Core: 010"
+  GOVT 2305: "Core: 070"
+  GOVT 2306: "Core: 070"
+  HIST 2384: "Core: 060"
+  HIST 1302: "Core: 060"
+  HIST 2322: "Core: 040"
+  THEA 1310: "Core: 050"
+  GEOG 2303: "Core: 080"
+  MATH 1316: Free Elective
+  RHET 1301: Free Elective
+  MATH 2312: Precalculus
+Fast Track:
+  FAST TRACK:
+    name: Fast Track Program Benchmark Courses
+    reqs: # one of SE 4348,SE 4351, or SE 4352
+      - SE 2340
+      - SE 3306
+      - SE 3345
+      - SE 3354
+      - SE 4367
+      - SE 4348
+    replaces: null
+  SE 6329:
+    name: Object Oriented Design
+    reqs: [FAST TRACK, SE 3354]
+    replaces: SE 4376
+  CS 6360:
+    name: Database Systems
+    reqs: [FAST TRACK, SE 3345]
+    replaces: SE 4347
+  SE 6362:
+    name: Architecture and Design *(Approval Needed)*
+    reqs: [FAST TRACK, SE 3354]
+    replaces: SE 4352
+  CS 6371:
+    name: Programming Languages *(Approval Needed)*
+    reqs: [FAST TRACK, SE 3345, CS 4384]
+    replaces: CS 4337
+  CS 5349:
+    name: Automata Theory
+    reqs: [FAST TRACK, CS 2305]
+    replaces: CS 4384
+taken:
+  Transfer:
+    - MATH 1316
+    - RHET 1301
+    - RHET 1302
+    - GEOG 2303
+    - HIST 2322
+    - MATH 2413
+    - CS 1436
+    - CS 1337
+    - MATH 2312
+  2025 Fall:
+    - ECS 1100
+    - CS 1200
+    - MATH 2414
+    - GOVT 2305
+    - CS 2337
+  2026 Spring:
+    - CS 2305
+    - SE 3377
+    - GOVT 2306
+    - THEA 1310
+    - HIST 2384
+future:
+  2026 Summer:
+    - PHYS 2325
+    - PHYS 2125
+    - HIST 1302
+    - ECS 2390
+  2026 Fall:
+    - SE 2340
+    - SE 3345
+    - SE 3306
+    - SE 3354
+    - PHYS 2326
+    - PHYS 2126
+  2027 Spring:
+    - SE 4348
+    - SE 4367
+    - SE 3162
+    - MATH 2418
+    - MATH 4332
+    - FAST TRACK
+  2027 Summer:
+    - SE 4381
+  2027 Fall:
+    - SE 6362
+    - SE 6329
+    - CS 5349
+    - SE 4351
+    - CS 4397
+  2028 Spring:
+    - CS 6360
+    - CS 6371
+    - SE 3341
+    - SE 4485
