@@ -22,19 +22,21 @@
           "type": "array",
           "description": "Course requirements",
           "uniqueItems": true,
-          "items": {
-            "$ref": "#/definitions/CourseCode"
-          }
+          "items": { "$ref": "#/definitions/CourseCode" }
         },
         "coreqs": {
           "type": "array",
           "description": "Course co-requirements",
           "uniqueItems": true,
-          "items": {
-            "$ref": "#/definitions/CourseCode"
-          }
+          "items": { "$ref": "#/definitions/CourseCode" }
         }
       }
+    },
+    "CourseInputOrName": {
+      "anyOf": [
+        { "$ref": "#/definitions/CourseInput" },
+        { "type": "string", "description": "The course name" }
+      ]
     },
     "CourseInputFT": {
       "allOf": [
@@ -91,7 +93,7 @@
       "description": "Courses required for the degree",
       "patternProperties": {
         "^//.*": { "$ref": "#/definitions/CommentContent" },
-        "\\w+ \\w+": { "$ref": "#/definitions/CourseInput" }
+        "\\w+ \\w+": { "$ref": "#/definitions/CourseInputOrName" }
       }
     },
     "Fast Track": {

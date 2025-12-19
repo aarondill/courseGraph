@@ -13,6 +13,7 @@ const makeCourse = ([id, course]: [
   CourseCode,
   CourseInput | CourseInputFT,
 ]): Course => {
+  if (typeof course == "string") course = { name: course };
   const { name, reqs, coreqs } = course;
   const replacementFor = ("replaces" in course && course.replaces) || undefined;
   const isFastTrackBenchmark = fastTrackBenchmarks.has(id);
