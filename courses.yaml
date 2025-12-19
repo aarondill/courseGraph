@@ -113,7 +113,7 @@
   },
 
   "Fast Track": {
-    "// reqs": "one of SE 4348,SE 4351, or SE 4352",
+    # reqs: one of SE 4348,SE 4351, or SE 4352
     "FAST TRACK": {
       "name": "Fast Track Program Benchmark Courses",
       "reqs": [
