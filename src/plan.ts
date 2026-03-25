@@ -67,7 +67,14 @@ function printPlan(
     // Add all course in this semester to the taken list (in case of
     // co-requisites). The user needs to make sure they don't take a
     // prerequisite in the same semester as the dependent course.
-    lines.push(`## ${semester}`);
+    const hours = totake
+      .values()
+      .map(c => {
+        const r = Number(c.split(" ")?.[1]?.charAt(1));
+        return isNaN(r) ? 0 : r;
+      })
+      .reduce((a, b) => a + b);
+    lines.push(`## ${semester} - ${hours} hours`);
 
     for (const c of totake) coursesCurrentSemester.add(c);
     totake
