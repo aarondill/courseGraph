@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=./courses.schema.json
 %YAML 1.2
 ---
-degree: B.S. in Computer Science
+degree: B.S. in Software Engineering
 courses:
   ECS 1100: Intro to Engineering and CS
   CS 1200: Intro to CS and SE
