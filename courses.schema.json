@@ -9,7 +9,7 @@
     },
     "CourseCode": {
       "type": "string",
-      "pattern": "^\\w+ \\w+$",
+      "pattern": "^\\S+ \\S+$",
       "description": "The course code"
     },
     "CourseInput": {
@@ -93,7 +93,7 @@
       "description": "Courses required for the degree",
       "patternProperties": {
         "^//.*": { "$ref": "#/definitions/CommentContent" },
-        "\\w+ \\w+": { "$ref": "#/definitions/CourseInputOrName" }
+        "\\S+ \\S+": { "$ref": "#/definitions/CourseInputOrName" }
       }
     },
     "Fast Track": {
@@ -101,7 +101,7 @@
       "description": "Courses taking for fast track program",
       "patternProperties": {
         "^//.*": { "$ref": "#/definitions/CommentContent" },
-        "\\w+ \\w+": { "$ref": "#/definitions/CourseInputFT" }
+        "\\S+ \\S+": { "$ref": "#/definitions/CourseInputFT" }
       }
     },
     "taken": { "$ref": "#/definitions/SemesterCourseMapInput" },
