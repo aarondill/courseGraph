@@ -73,7 +73,7 @@ function printPlan(
         const r = Number(c.split(" ")?.[1]?.charAt(1));
         return isNaN(r) ? 0 : r;
       })
-      .reduce((a, b) => a + b);
+      .reduce((a, b) => a + b, 0);
     lines.push(`## ${semester} - ${hours} hours`);
 
     for (const c of totake) coursesCurrentSemester.add(c);
