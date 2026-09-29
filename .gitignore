@@ -1,5 +1,6 @@
 out.*
 Course Graph.svg
 /node_modules/
+/package-lock.json
 # This file is generated. Don't modify it.
 output.svg
