@@ -1,4 +1,5 @@
 out.*
 Course Graph.svg
+/node_modules/
 # This file is generated. Don't modify it.
 output.svg
